@@ -14,6 +14,9 @@ import { NewPasswdComponent } from './components/auth/new-passwd/new-passwd.comp
 import { NewRegisterComponent } from './components/auth/new-register/new-register.component';
 import { BookcabComponent } from './components/bookcab/bookcab.component';
 import { BookingComponent } from './components/booking/booking.component';
+import { CabComponent } from './components/cab/cab.component';
+import { ListofCabsComponent } from './components/cab/listof-cabs/listof-cabs.component';
+import { CabRequestComponent } from './components/cab/cab-request/cab-request.component';
 import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { ClientComponent } from './components/client/client.component';
 import { CreateClientComponent } from './components/client/create-client/create-client.component';
@@ -25,6 +28,7 @@ import { CreateDriverComponent } from './components/driver/create-driver/create-
 import { ListofDriversComponent } from './components/driver/listof-drivers/listof-drivers.component';
 import { DriverDetailComponent } from './components/driver/driver-detail/driver-detail.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { CabCategoryComponent } from './components/cab/cab-category/cab-category.component';
 
 
 const routes: Routes = [
@@ -47,6 +51,12 @@ const routes: Routes = [
   ]},
   { path:'bookcab' , component:BookcabComponent },
   { path:'booking' , component:BookingComponent },
+  { path:'cab' , children: [
+    { path :'', component: CabComponent },
+    { path :'cabcategory', component: CabCategoryComponent },
+    { path :'listofcabs', component: ListofCabsComponent },
+    { path :'cabrequest', component: CabRequestComponent },
+  ]},
   { path:'calcfare' , component:CalcfareComponent },
   { path:'client' , children: [
     { path :'', component: ClientComponent },

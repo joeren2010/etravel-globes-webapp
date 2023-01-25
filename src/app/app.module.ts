@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './components/admin/admin.module';
 import { AuthModule } from './components/auth/auth.module';
+import { CabModule } from './components/cab/cab.module';
 import { ClientModule } from './components/client/client.module';
 import { DriverModule } from './components/driver/driver.module';
 import { UsersModule } from './components/users/users.module';
@@ -22,8 +23,6 @@ import { BookcabComponent } from './components/bookcab/bookcab.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { PaymentComponent } from './components/payment/payment.component';
-import { AuthService } from './servces/auth.service';
-
 
 
 @NgModule({
@@ -40,7 +39,7 @@ import { AuthService } from './servces/auth.service';
     BookcabComponent,
     BookingComponent,
     CalcfareComponent,
-    PaymentComponent
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +48,7 @@ import { AuthService } from './servces/auth.service';
     ReactiveFormsModule,
     AuthModule,
     AdminModule,
+    CabModule,
     ClientModule,
     DriverModule,
     UsersModule,
