@@ -22,8 +22,8 @@ export class CabService {
   constructor(private httpClient: HttpClient) { }
 
   getCab() {
-    return this.httpClient.get<any[]>(this.urlGetAllCab);
-    //return this.httpClient.get<any[]>('../../assets/json/products.json');
+    //return this.httpClient.get<any[]>(this.urlGetAllCab);
+    return this.httpClient.get<any[]>('../../assets/data/cab.json');
   }
 
   storeCab(cab:any): Observable<string>{

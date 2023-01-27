@@ -19,55 +19,39 @@
             </li>
             <li class="nav-item">
                <a class="nav-link" routerLink="/contact" [skipLocationChange]="true">
-                  CONTACTS
+                  CONTACT
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" routerLink="/booking/bookcab" [skipLocationChange]="true">
+                  CABS
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" routerLink="/booking/bookhotel" [skipLocationChange]="true">
+                  HOTELS
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" routerLink="/booking/bookflight" [skipLocationChange]="true">
+                  FLIGHTS
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" routerLink="/booking/bookflight" [skipLocationChange]="true">
+                  CART
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" routerLink="/booking/bookflight" [skipLocationChange]="true">
+                  WISHLIST
                </a>
             </li>
             <div *ngIf="loggedIn">
                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        USERS
-                     </a>
-                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                           <a class="dropdown-item" routerLink="/users" [skipLocationChange]="true">
-                              <strong>ListOf Users</strong>
-                           </a>
-                        </li>
-                        <li>
-                           <a class="dropdown-item" routerLink="/users/create" [skipLocationChange]="true">
-                              <strong>Create User</strong>
-                           </a>
-                        </li>
-                        <li>
-                           <a class="dropdown-item" routerLink="/users/view" [skipLocationChange]="true">
-                              <strong>User Details</strong>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" routerLink="/products" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" routerLinkActive>
-                        PRODUCTS
-                     </a>
-                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                           <a class="dropdown-item" routerLink="/products/categories" [skipLocationChange]="true">
-                              <strong> Rides </strong>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
                   <li class="nav-item">
-                     <a class="nav-link" routerLink="#" [skipLocationChange]="true">
-                        SHIPMENTS
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" routerLink="/payment" [skipLocationChange]="true">
-                        PAYMENTS
+                     <a class="nav-link" routerLink="/helpcenter" [skipLocationChange]="true">
+                        HELP CENTER
                      </a>
                   </li>
                </ul>
@@ -75,13 +59,13 @@
             <ul class="navbar-nav ml-auto mr-20">
                <div *ngIf="!loggedIn">
                   <ul class="navbar-nav ml-auto mr-20">
-                     <li class="nav-item">
+                     <!-- <li class="nav-item">
                         <a class="nav-link" routerLink="/booking" [skipLocationChange]="true">
                            BOOKINGS
                         </a>
-                     </li>
+                     </li> -->
                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/orders" [skipLocationChange]="true">
+                        <a class="nav-link" routerLink="/auth/newregister" [skipLocationChange]="true">
                            SIGNUP
                         </a>
                      </li>
@@ -103,23 +87,69 @@
                   </ul>
                </div>
                <div *ngIf="loggedInClient">
-                  <li class="nav-item dropdown">
+                  <ul class="navbar-nav ml-auto mr-20">
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/payment/clientpay" [skipLocationChange]="true">
+                           PAYMENTS
+                        </a>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           MY RESV
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/booking" [skipLocationChange]="true">
+                              <strong>My Bookings</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/cab/cabcategory" [skipLocationChange]="true">
+                              <strong>TypeOf Cabs</strong>
+                           </a>
+                        </div>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/offer/clientoffer" [skipLocationChange]="true">
+                           SPECIAL OFFERS
+                        </a>
+                     </li>
+                     <!-- <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <strong>CLIENT ACCT</strong>
+                        RESV MGT
                      </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
-                           <strong>Create Clients</strong>
-                        </a>
-                        <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
-                           <strong>New Password</strong>
-                        </a>
-                        <a class="dropdown-item" routerLink="#" (click)="logoutClient()" [skipLocationChange]="true">
-                           <strong>Client Signout</strong>
+                        <a class="dropdown-item" routerLink="/resvmgt/resvcabs" [skipLocationChange]="true">
+                           <strong>Cabs Resv</strong>
                         </a>
                      </div>
-                  </li>
+                  </li> -->
+                     <li>
+                        <form class="d-flex">
+                           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                           <button class="btn btn-outline-light" type="submit">SEARCH</button>
+                        </form>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           <strong>CLIENT ACCT</strong>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
+                              <strong>Update Profile</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
+                              <strong>New Password</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
+                              <strong>Update Setting</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="#" (click)="logoutClient()" [skipLocationChange]="true">
+                              <strong>Clients Signout</strong>
+                           </a>
+                        </div>
+                     </li>
+                  </ul>
                </div>
                <div *ngIf="loggedInDriver">
                   <li class="nav-item dropdown">
@@ -140,55 +170,137 @@
                      </div>
                   </li>
                </div>
-               <!-- <div *ngIf="loggedInAdmin"> -->
-               <ul class="navbar-nav ml-auto mr-20">
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        CABS MGT
-                     </a>
-                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" routerLink="/cab" [skipLocationChange]="true">
-                           <strong>ListOf Cabs</strong>
+               <div *ngIf="loggedInAdmin">
+                  <ul class="navbar-nav ml-auto mr-20">
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/payment/paymgt" [skipLocationChange]="true">
+                           PAY MGT
                         </a>
-                        <a class="dropdown-item" routerLink="/cab/cabrequest" [skipLocationChange]="true">
-                           <strong>Cab Orders</strong>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           CABS MGT
                         </a>
-                        <a class="dropdown-item" routerLink="/cab/cabcategory" [skipLocationChange]="true">
-                           <strong>TypeOf Cab</strong>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/cab" [skipLocationChange]="true">
+                              <strong>Cab Dashboard</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/cab/cabcategory" [skipLocationChange]="true">
+                              <strong>Cab Categories</strong>
+                           </a>
+                        </div>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/resvmgt" [skipLocationChange]="true">
+                           RESV MGT
                         </a>
-                     </div>
-                  </li>
-                  <li>
-                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">SEARCH</button>
-                     </form>
-                  </li>
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <strong>ADMIN ACCT</strong>
-                     </a>
-                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
-                           <strong>Create Admins</strong>
+                     </li>
+                     <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           RESV MGT
                         </a>
-                        <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
-                           <strong>New Password</strong>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/resvmgt/resvcabs" [skipLocationChange]="true">
+                              <strong>Cabs Resv</strong>
+                           </a>
+                        </div>
+                     </li> -->
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/offer/offermgt" [skipLocationChange]="true">
+                           OFFER MGT
                         </a>
-                        <a class="dropdown-item" routerLink="#" (click)="logoutAdmin()" [skipLocationChange]="true">
-                           <strong>Admin Signout</strong>
+                     </li>
+                     <li>
+                        <form class="d-flex">
+                           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                           <button class="btn btn-outline-light" type="submit">SEARCH</button>
+                        </form>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           <strong>ADMIN ACCT</strong>
                         </a>
-                     </div>
-                  </li>
-               </ul>
-               <!-- </div> -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
+                              <strong>Create Client</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
+                              <strong>Create Driver</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
+                              <strong>Create Admins</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
+                              <strong>Update Profile</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
+                              <strong>Update Setting</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
+                              <strong>New Password</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="#" (click)="logoutAdmin()" [skipLocationChange]="true">
+                              <strong>Admin Signout</strong>
+                           </a>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
             </ul>
          </ul>
       </div>
    </div>
 </nav>
+
+
+
+
+
+
+<!-- <li class="nav-item dropdown">
+   <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      USERS
+   </a>
+   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+         <a class="dropdown-item" routerLink="/users" [skipLocationChange]="true">
+            <strong>Listof Users</strong>
+         </a>
+      </li>
+      <li>
+         <a class="dropdown-item" routerLink="/users/create" [skipLocationChange]="true">
+            <strong>Create User</strong>
+         </a>
+      </li>
+      <li>
+         <a class="dropdown-item" routerLink="/users/view" [skipLocationChange]="true">
+            <strong>User Details</strong>
+         </a>
+      </li>
+   </ul>
+</li>
+<li class="nav-item dropdown">
+   <a class="nav-link dropdown-toggle" routerLink="/products" role="button" data-bs-toggle="dropdown"
+      aria-expanded="false" routerLinkActive>
+      PRODUCTS
+   </a>
+   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+         <a class="dropdown-item" routerLink="/products/categories" [skipLocationChange]="true">
+            <strong> Rides </strong>
+         </a>
+      </li>
+   </ul>
+</li>
+<li class="nav-item">
+   <a class="nav-link" routerLink="#" [skipLocationChange]="true">
+      SHIPMENTS
+   </a>
+</li> -->
 
 
 

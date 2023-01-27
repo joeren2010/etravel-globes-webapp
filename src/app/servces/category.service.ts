@@ -22,17 +22,17 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) { }
 
   getAll() {
-    return this.httpClient.get<any[]>(this.urlGetAllCat);
-    //return this.httpClient.get<any[]>('../../assets/json/category.json');
+    //return this.httpClient.get<any[]>(this.urlGetAllCat);
+    return this.httpClient.get<any[]>('../../assets/data/categories.json');
   }
 
   getOne(id:number) {
-    return this.httpClient.get<any[]>('../../assets/json/category.json');
+    return this.httpClient.get<any[]>('../../assets/data/categories.json');
   }
 
   getCategory() {
-    return this.httpClient.get<any[]>(this.urlGetAllCat);
-    //return this.httpClient.get<any[]>('../../assets/json/categories.json');
+    //return this.httpClient.get<any[]>(this.urlGetAllCat);
+    return this.httpClient.get<any[]>('../../assets/data/categories.json');
   }
 
   storeCategory(category:any): Observable<string>{

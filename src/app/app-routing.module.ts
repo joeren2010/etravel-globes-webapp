@@ -16,7 +16,12 @@ import { BookcabComponent } from './components/bookcab/bookcab.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { CabComponent } from './components/cab/cab.component';
 import { ListofCabsComponent } from './components/cab/listof-cabs/listof-cabs.component';
-import { CabRequestComponent } from './components/cab/cab-request/cab-request.component';
+import { CabReservComponent } from './components/cab/cab-reserv/cab-reserv.component';
+import { CabCategoryComponent } from './components/cab/cab-category/cab-category.component';
+import { CabRequestsComponent } from './components/cab/cab-requests/cab-requests.component';
+import { CabmgtComponent } from './components/cabmgt/cabmgt.component';
+import { CabCategoriesComponent } from './components/cabmgt/cab-categories/cab-categories.component';
+import { CabDashboardComponent } from './components/cabmgt/cab-dashboard/cab-dashboard.component';
 import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { ClientComponent } from './components/client/client.component';
 import { CreateClientComponent } from './components/client/create-client/create-client.component';
@@ -28,7 +33,8 @@ import { CreateDriverComponent } from './components/driver/create-driver/create-
 import { ListofDriversComponent } from './components/driver/listof-drivers/listof-drivers.component';
 import { DriverDetailComponent } from './components/driver/driver-detail/driver-detail.component';
 import { PaymentComponent } from './components/payment/payment.component';
-import { CabCategoryComponent } from './components/cab/cab-category/cab-category.component';
+import { ResvmgtComponent } from './components/resvmgt/resvmgt.component';
+import { ResvCabsComponent } from './components/resvmgt/resv-cabs/resv-cabs.component';
 
 
 const routes: Routes = [
@@ -53,9 +59,15 @@ const routes: Routes = [
   { path:'booking' , component:BookingComponent },
   { path:'cab' , children: [
     { path :'', component: CabComponent },
-    { path :'cabcategory', component: CabCategoryComponent },
     { path :'listofcabs', component: ListofCabsComponent },
-    { path :'cabrequest', component: CabRequestComponent },
+    { path :'cabreservn', component: CabReservComponent },
+    { path :'cabcategory', component: CabCategoryComponent },
+    { path :'cabrequests', component: CabRequestsComponent },
+  ]},
+  { path:'cabmgt' , children: [
+    { path :'', component: CabmgtComponent },
+    { path :'cabcategories', component: CabCategoriesComponent },
+    { path :'cabdashboard', component: CabDashboardComponent },
   ]},
   { path:'calcfare' , component:CalcfareComponent },
   { path:'client' , children: [
@@ -72,6 +84,10 @@ const routes: Routes = [
     { path :'driverdetail', component: DriverDetailComponent },
   ]},
   { path:'payment' , component:PaymentComponent },
+  { path:'resvmgt' , children: [
+    { path :'', component: ResvmgtComponent },
+    { path :'resvcabs', component: ResvCabsComponent },
+  ]},
 ];
 
 @NgModule({

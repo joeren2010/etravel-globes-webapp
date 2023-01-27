@@ -9,8 +9,10 @@
                   </div>
                   <div class="col-12 col-sm-6">
                      <div class="d-flex justify-content-end align-items-center">
-                        <a type="button" class="btn btn-dark me-1" [routerLink]="['./', 'cabcategory']">Cab Category</a>
-                        <button class="btn btn-dark me-1" (click)="openModal(cabModal)">Add New Cab</button>
+                        <a type="button" class="btn btn-dark me-1" [routerLink]="['./', 'cabcategory']">
+                           Cab Categories
+                        </a>
+                        <button class="btn btn-dark me-1" (click)="openModal(cabModal)">Add New Cabs</button>
                      </div>
                   </div>
                </div>
@@ -20,7 +22,7 @@
                   <thead class="thead-light">
                      <tr>
                         <th scope="col">S/N</th>
-                        <th scope="col">Cab Code</th>
+                        <th scope="col">Cab Id</th>
                         <th scope="col">Model</th>
                         <th scope="col">Details</th>
                         <th scope="col">Category</th>
@@ -31,6 +33,7 @@
                   <tbody>
                      <tr *ngFor="let cab of cabObservable | async; index as idx">
                         <td>{{ idx + 1 }}</td>
+                        <!-- names used below must match names used in your data table -->
                         <td>{{ cab["cabCode"] }}</td>
                         <td class="text-wrap">{{ cab["cabTitle"] }}</td>
                         <td class="text-wrap">{{ cab["cabDescription"] }}</td>
@@ -54,6 +57,7 @@
       </div>
    </div>
 </div>
+
 
 <!-- create / update cab-->
 <!-- create cab-->
@@ -85,12 +89,12 @@
                   </select>
                </div>
                <div class="form-group m-0 mb-2">
-                  <label for="price" class="text-sm">Price</label>
+                  <label for="price" class="text-sm">Base Price</label>
                   <input type="number" name="price" formControlName="price" class="form-control"
                      placeholder="enter cab base price" required>
                </div>
                <div class="form-group m-0 mb-2">
-                  <label for="cabCode" class="text-sm">Code</label>
+                  <label for="cabCode" class="text-sm">Cab Id</label>
                   <input type="text" name="cabCode" formControlName="cabCode" class="form-control"
                      placeholder="enter cab id or code" min="1" required>
                </div>
@@ -175,7 +179,7 @@
          </button>
       </div>
    </form>
-</ng-template> <!-- create cab -->
+</ng-template>
 
 
 <!---view cab details -->
@@ -204,8 +208,7 @@
          <p class="text-wrap">{{ cabModel?.addedOn | date: 'dd MMMM yyyy, hh:MM:ss aa' }}</p>
       </div>
    </div>
-</ng-template> <!---view cab details -->
-
+</ng-template>
 
 
 <!--view images-->
@@ -213,7 +216,7 @@
    <div class="modal-header border-0 d-flex justify-content-between align-items-center">
       <h3>Images</h3>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()">
-         <span aria-hidden="true">&times;</span>
+         <!-- <span aria-hidden="true">&times;</span> -->
       </button>
    </div>
    <div class="modal-body">
