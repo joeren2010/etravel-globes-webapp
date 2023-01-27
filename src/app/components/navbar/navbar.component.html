@@ -136,23 +136,58 @@
                   </ul>
                </div>
                <div *ngIf="loggedInDriver">
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <strong>DRIVER ACCT</strong>
-                     </a>
-                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
-                           <strong>Create Drivers</strong>
+                  <ul class="navbar-nav ml-auto mr-20">
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           CHECK RESV
                         </a>
-                        <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
-                           <strong>New Password</strong>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/resv/resvdriver" [skipLocationChange]="true">
+                              <strong>Reservations</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/cab/cabcatoth" [skipLocationChange]="true">
+                              <strong>TypeOf Cabs</strong>
+                           </a>
+                        </div>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/offer/offerdriver" [skipLocationChange]="true">
+                           OFFERS
                         </a>
-                        <a class="dropdown-item" routerLink="#" (click)="logoutDriver()" [skipLocationChange]="true">
-                           <strong>Driver Signout</strong>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/payment/paydriver" [skipLocationChange]="true">
+                           MY PAY
                         </a>
-                     </div>
-                  </li>
+                     </li>
+                     <li>
+                        <form class="d-flex">
+                           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                           <button class="btn btn-outline-light" type="submit">SEARCH</button>
+                        </form>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                           <strong>DRIVER ACCT</strong>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
+                              <strong>Update Profile</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
+                              <strong>New Password</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
+                              <strong>Update Setting</strong>
+                           </a>
+                           <a class="dropdown-item" routerLink="#" (click)="logoutDriver()" [skipLocationChange]="true">
+                              <strong>Driver Signout</strong>
+                           </a>
+                        </div>
+                     </li>
+                  </ul>
                </div>
                <div *ngIf="loggedInAdmin">
                   <ul class="navbar-nav ml-auto mr-20">
