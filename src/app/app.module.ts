@@ -25,6 +25,11 @@ import { BookcabComponent } from './components/bookcab/bookcab.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { ResvComponent } from './components/resv/resv.component';
+import { CartComponent } from './components/cart/cart.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { HelpcenterComponent } from './components/helpcenter/helpcenter.component';
+import { OfferComponent } from './components/offer/offer.component';
 
 
 @NgModule({
@@ -42,6 +47,11 @@ import { PaymentComponent } from './components/payment/payment.component';
     BookingComponent,
     CalcfareComponent,
     PaymentComponent,
+    ResvComponent,
+    CartComponent,
+    WishlistComponent,
+    HelpcenterComponent,
+    OfferComponent,
   ],
   imports: [
     BrowserModule,
