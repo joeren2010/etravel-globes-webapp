@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PaymentComponent } from './payment.component';
 import { PayclientComponent } from './payclient/payclient.component';
 import { PaydriverComponent } from './paydriver/paydriver.component';
-import { PaymgtComponent } from './paymgt/paymgt.component';
-
 
 
 @NgModule({
@@ -12,7 +10,6 @@ import { PaymgtComponent } from './paymgt/paymgt.component';
     PaymentComponent,
     PayclientComponent,
     PaydriverComponent,
-    PaymgtComponent
   ],
   imports: [
     CommonModule

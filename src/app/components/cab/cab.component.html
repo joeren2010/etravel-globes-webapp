@@ -5,7 +5,7 @@
             <div class="card-header bg-white border-0">
                <div class="row">
                   <div class="col-12 col-sm-6">
-                     <h4>Cabs</h4>
+                     <h4>Cab Dashboard - Admin</h4>
                   </div>
                   <div class="col-12 col-sm-6">
                      <div class="d-flex justify-content-end align-items-center">
@@ -37,7 +37,7 @@
                         <td>{{ cab["cabCode"] }}</td>
                         <td class="text-wrap">{{ cab["cabTitle"] }}</td>
                         <td class="text-wrap">{{ cab["cabDescription"] }}</td>
-                        <td>{{ cab["category"]["categoryName"] }}</td>
+                        <td>{{ cab["cabCategory"]["categoryName"] }}</td>
                         <td>{{ cab["price"] | currency:'USD':'symbol':'1.0' }}</td>
                         <td>
                            <button type="button" class="btn btn-sm btn-dark me-1"
@@ -80,11 +80,12 @@
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="name" class="text-sm">Category</label>
-                  <select id="name" name="category" class="form-select shadow-none form-control"
-                     formControlName="category" [compareWith]="compareByCategoryId"
+                  <select id="name" name="cabCategory" class="form-select shadow-none form-control"
+                     formControlName="cabCategory" [compareWith]="compareByCategoryId"
                      (selectedValueChange)="onSelectOption($event)" required>
-                     <option *ngFor="let category of categoryObservable | async; index as idx" [ngValue]="category">
-                        {{ category.categoryName }}
+                     <option *ngFor="let cabCategory of cabcategoryObservable | async; index as idx"
+                        [ngValue]="cabCategory">
+                        {{ cabCategory.categoryName }}
                      </option>
                   </select>
                </div>

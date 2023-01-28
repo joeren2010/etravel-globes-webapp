@@ -90,10 +90,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" routerLink="/resv/resvclient" [skipLocationChange]="true">
-                              <strong>My Bookings</strong>
+                              <strong>My Reservations</strong>
                            </a>
-                           <a class="dropdown-item" routerLink="/cab/cabcatoth" [skipLocationChange]="true">
-                              <strong>TypeOf Cabs</strong>
+                           <a class="dropdown-item" routerLink="/cab/cabcatclient" [skipLocationChange]="true">
+                              <strong>Cabs Categories</strong>
                            </a>
                         </div>
                      </li>
@@ -140,13 +140,13 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
-                           CHECK RESV
+                           RESV TASKS
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" routerLink="/resv/resvdriver" [skipLocationChange]="true">
                               <strong>Reservations</strong>
                            </a>
-                           <a class="dropdown-item" routerLink="/cab/cabcatoth" [skipLocationChange]="true">
+                           <a class="dropdown-item" routerLink="/cab/cabcatdriver" [skipLocationChange]="true">
                               <strong>TypeOf Cabs</strong>
                            </a>
                         </div>
@@ -189,68 +189,68 @@
                      </li>
                   </ul>
                </div>
-               <div *ngIf="loggedInAdmin">
-                  <ul class="navbar-nav ml-auto mr-20">
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                           CABS MGT
+               <!-- <div *ngIf="loggedInAdmin"> -->
+               <ul class="navbar-nav ml-auto mr-20">
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        CABS MGT
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/cab" [skipLocationChange]="true">
+                           <strong>Cab Dashboard</strong>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" routerLink="/cab/cabmgt" [skipLocationChange]="true">
-                              <strong>Cab Dashboard</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/cab/cabcatmgt" [skipLocationChange]="true">
-                              <strong>Cab Categories</strong>
-                           </a>
-                        </div>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/resv/resvmgt" [skipLocationChange]="true">
-                           RESV MGT
+                        <a class="dropdown-item" routerLink="/cab/cabcategory" [skipLocationChange]="true">
+                           <strong>Cab Categories</strong>
                         </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/offer/offermgt" [skipLocationChange]="true">
-                           OFFER MGT
+                     </div>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" routerLink="/resv" [skipLocationChange]="true">
+                        RESV MGT
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" routerLink="/offer" [skipLocationChange]="true">
+                        OFFER MGT
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" routerLink="/payment" [skipLocationChange]="true">
+                        PAY MGT
+                     </a>
+                  </li>
+                  <li>
+                     <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">SEARCH</button>
+                     </form>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <strong>ADMIN ACCT</strong>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
+                           <strong>Create Signup</strong>
                         </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/payment/paymgt" [skipLocationChange]="true">
-                           PAY MGT
+                        <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
+                           <strong>Update Profile</strong>
                         </a>
-                     </li>
-                     <li>
-                        <form class="d-flex">
-                           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                           <button class="btn btn-outline-light" type="submit">SEARCH</button>
-                        </form>
-                     </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                           <strong>ADMIN ACCT</strong>
+                        <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
+                           <strong>New Password</strong>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" routerLink="/auth/newregister" [skipLocationChange]="true">
-                              <strong>Create Signup</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
-                              <strong>Update Profile</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
-                              <strong>New Password</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
-                              <strong>Update Setting</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="#" (click)="logoutAdmin()" [skipLocationChange]="true">
-                              <strong>Admin Signout</strong>
-                           </a>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
+                        <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
+                           <strong>Update Setting</strong>
+                        </a>
+                        <a class="dropdown-item" routerLink="#" (click)="logoutAdmin()" [skipLocationChange]="true">
+                           <strong>Admin Signout</strong>
+                        </a>
+                     </div>
+                  </li>
+               </ul>
+               <!-- </div> -->
             </ul>
          </ul>
       </div>

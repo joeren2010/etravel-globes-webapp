@@ -3,7 +3,7 @@
         "cabId": 1,
         "cabTitle": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
         "cabDescription": "Easy upgrade for faster boot up, shutdown, application load and response",
-        "category": {
+        "cabCategory": {
           "categoryId": 1,
           "categoryName": "Electronics",
           "categoryDescription": "",
@@ -30,7 +30,7 @@
         "cabId": 2,
         "cabTitle": "HP DeskJet 2755e Wireless Color All-in-One Printer",
         "cabDescription": "Network-Ready, Energy Star Certified, Decal-Printing, Cloud Print Enabled",
-        "category": {
+        "cabCategory": {
           "categoryId": 1,
           "categoryName": "Electronics",
           "categoryDescription": "",

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategoryService } from 'src/app/servces/category.service';
-import { CabService } from 'src/app/servces/cab.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CabService } from 'src/app/servces/cab.service';
+import { CabcategoryService } from 'src/app/servces/cabcategory.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CabComponent implements OnInit {
   public cabObservable: Observable<any[]> = new Observable();
-  public categoryObservable: Observable<any[]> = new Observable();
+  public cabcategoryObservable: Observable<any[]> = new Observable();
 
   cabForm: FormGroup = new FormGroup({});
   cabModel: Cab | undefined;
@@ -26,14 +26,14 @@ export class CabComponent implements OnInit {
 
   constructor(
     private cabService: CabService, 
-    private categoryService:CategoryService, 
+    private cabcategoryService:CabcategoryService, 
     private modalService: NgbModal, 
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.cabObservable = this.cabService.getCab();
-    this.categoryObservable = this.categoryService.getCategory();    
+    this.cabcategoryObservable = this.cabcategoryService.getCategory();    
   }
 
 
@@ -55,7 +55,7 @@ export class CabComponent implements OnInit {
         images: this.fb.array([]),
         thumbnailImage: [null],
         cabDescription: [null],
-        category: [null],
+        cabCategory: [null],
         active: [true],
         addedOn: [],
         rating: [0]
@@ -70,21 +70,21 @@ export class CabComponent implements OnInit {
         images: [cabObj.images],
         thumbnailImage: [cabObj.thumbnailImage],
         cabDescription: [cabObj.cabDescription],
-        category: [cabObj.category],
+        cabCategory: [cabObj.cabCategory],
         active: [cabObj.active],
         addedOn: [cabObj.addedOn],
         rating: [cabObj.rating]
       });
-      this.onSelectOption(cabObj.category);
+      this.onSelectOption(cabObj.cabCategory);
       this.tempImageFiles = cabObj.images || [];
     }
   }
 
-  compareByCategoryId(category1: Category, category2: Category) {
+  compareByCategoryId(category1: cabCategory, category2: cabCategory) {
     return category1 && category2 && category1.categoryId === category2.categoryId;
   }
 
-  onSelectOption(category: Category | Event | undefined) {
+  onSelectOption(category: cabCategory | Event | undefined) {
     // this.cabForm.patchValue({
     //   category: this.category.find(x => x.categoryId === category.categoryId)
     // })
@@ -170,7 +170,7 @@ export interface Cab {
   cabCode?: string;
   cabDescription?: string;
   price?: number;
-  category?: Category;
+  cabCategory?: cabCategory;
   images?: string[];
   thumbnailImage?: number;
   active?: boolean;
@@ -178,7 +178,7 @@ export interface Cab {
   rating?: number;
 }
 
-export interface Category {
+export interface cabCategory {
   categoryId?: string;
   categoryName?: string;
   categoryDescription?: string;

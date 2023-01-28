@@ -1,0 +1,18 @@
+[
+    {
+      "categoryId": 1,
+      "categoryName": "Electronics",
+      "categoryDescription": "The field of electronics is a branch of physics and electrical engineering that deals with the emission.",
+      "categoryImageUrl": ["https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"],
+      "active": true,
+      "addedOn": "10 August 2020"
+    },
+    {
+        "categoryId": 2,
+        "categoryName": "Gifts & Crafts",
+        "categoryDescription": "The field of electronics is a branch of physics and electrical engineering that deals with the emission.",
+        "categoryImageUrl": ["https://m.media-amazon.com/images/I/61UdeL7aO-L._AC_SX679_.jpg"],
+        "active": false,
+        "addedOn": "11 August 2020"
+      }
+]

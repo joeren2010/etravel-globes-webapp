@@ -5,53 +5,43 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './components/admin/admin.module';
 import { AuthModule } from './components/auth/auth.module';
 import { CabModule } from './components/cab/cab.module';
-import { CabmgtModule } from './components/cabmgt/cabmgt.module';
 import { ClientModule } from './components/client/client.module';
 import { DriverModule } from './components/driver/driver.module';
-import { ResvmgtModule } from './components/resvmgt/resvmgt.module';
-import { UsersModule } from './components/users/users.module';
+import { PaymentModule } from './components/payment/payment.module';
+import { OfferModule } from './components/offer/offer.module';
+import { ResvModule } from './components/resv/resv.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HelpcenterComponent } from './components/helpcenter/helpcenter.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavsideComponent } from './components/navside/navside.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { BookcabComponent } from './components/bookcab/bookcab.component';
-import { BookingComponent } from './components/booking/booking.component';
-import { CalcfareComponent } from './components/calcfare/calcfare.component';
-import { PaymentComponent } from './components/payment/payment.component';
-import { ResvComponent } from './components/resv/resv.component';
-import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
-import { HelpcenterComponent } from './components/helpcenter/helpcenter.component';
-import { OfferComponent } from './components/offer/offer.component';
+import { CalcfareComponent } from './components/calcfare/calcfare.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
+    CartComponent,
     ContactComponent,
     FooterComponent,
     HeaderComponent,
+    HelpcenterComponent,    
     HomeComponent,
     NavbarComponent,
+    NavsideComponent,
     NotfoundComponent,
-    SidenavComponent,
-    BookcabComponent,
-    BookingComponent,
-    CalcfareComponent,
-    PaymentComponent,
-    ResvComponent,
-    CartComponent,
     WishlistComponent,
-    HelpcenterComponent,
-    OfferComponent,
+    CalcfareComponent,    
   ],
   imports: [
     BrowserModule,
@@ -61,11 +51,11 @@ import { OfferComponent } from './components/offer/offer.component';
     AuthModule,
     AdminModule,
     CabModule,
-    CabmgtModule,
     ClientModule,
     DriverModule,
-    ResvmgtModule,
-    UsersModule,
+    PaymentModule,
+    OfferModule,
+    ResvModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
