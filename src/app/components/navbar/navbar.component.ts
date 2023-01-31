@@ -4,6 +4,8 @@ import { AdminService } from 'src/app/servces/admin.service';
 //import { AuthService } from 'src/app/servces/auth.service';
 import { ClientService } from 'src/app/servces/client.service';
 import { DriverService } from 'src/app/servces/driver.service';
+import { ResvcabService } from 'src/app/servces/resvcab.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +23,7 @@ export class NavbarComponent implements OnInit {
     public clientService:ClientService,
     public driverService:DriverService,
     public adminService:AdminService,
+    public resvcabService:ResvcabService,
     public router:Router
   ) { }
 

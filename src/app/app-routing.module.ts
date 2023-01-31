@@ -19,6 +19,8 @@ import { CabCategoryComponent } from './components/cab/cab-category/cab-category
 import { CabCatotherComponent } from './components/cab/cab-catother/cab-catother.component';
 import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { CartComponent } from './components/cart/cart.component';
+import { BookAgainComponent } from './components/cart/book-again/book-again.component';
+import { SavedItemsComponent } from './components/cart/saved-items/saved-items.component';
 import { ClientComponent } from './components/client/client.component';
 import { CreateClientComponent } from './components/client/create-client/create-client.component';
 import { ListofClientsComponent } from './components/client/listof-clients/listof-clients.component';
@@ -43,6 +45,7 @@ import { ResvcabComponent } from './components/resv/resvcab/resvcab.component';
 import { ResvflightComponent } from './components/resv/resvflight/resvflight.component';
 import { ResvhotelComponent } from './components/resv/resvhotel/resvhotel.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { MyListComponent } from './components/wishlist/my-list/my-list.component';
 
 
 const routes: Routes = [
@@ -71,7 +74,11 @@ const routes: Routes = [
     { path :'cabcatother', component: CabCatotherComponent },
   ]},
   { path:'calcfare' , component:CalcfareComponent },
-  { path:'cart' , component:CartComponent },
+  { path:'cart' , children: [
+    { path :'', component: CartComponent },
+    { path :'bookagain', component: BookAgainComponent },
+    { path :'saveditems', component: SavedItemsComponent },
+  ]},
   { path:'client' , children: [
     { path :'', component: ClientComponent },
     { path :'createclient', component: CreateClientComponent },
@@ -105,7 +112,10 @@ const routes: Routes = [
     { path :'resvflight', component: ResvflightComponent },    
     { path :'resvhotel', component: ResvhotelComponent },
   ]},
-  { path:'wishlist' , component:WishlistComponent },
+  { path:'wishlist' , children: [
+    { path :'', component: WishlistComponent },
+    { path :'mylist', component: MyListComponent },    
+  ]},
 ];
 
 @NgModule({

@@ -6,23 +6,21 @@
     "cabId": 301,
     "cab": [
       {
-        "cabId": 1,
-        "cabCode": "PRD-ELE-1054",
-        "cabImg": [
-          "https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"
-        ],
-        "cabTitle": "Pontiac 2023 - A Nice 6-Seater Red Color  Car",
-        "cabDescription": "Easy upgrade for faster boot up, shutdown, application load and response",
-        "cabCategory": "Electronics",
-        "price": 300,
+        "cabId": 301,
+        "cabColor": "Red",
+        "cabImg": ["https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"],
+        "cabTitle": "Pontiac 2023",
+        "cabDescription": "Pontiac 2023 - A Nice 6-Seater Red Color  Car",
+        "cabCategory": "6-Seater",
+        "price": 30,
         "quantity": 1,
-        "totalPrice": 300
+        "totalPrice": 30
       }
     ],
     "totalItems": 1,
-    "itemsSubTotal": 1200,
-    "shipmentCharges": 100,
-    "totalAmount": 1300,
+    "itemsSubTotal": 30,
+    "travelCharges": 100,
+    "totalAmount": 130,
     "paymentStatus": 0,
     "paymentStatusTile": "Pending",
     "paymentMethod": 0,
@@ -43,35 +41,31 @@
     "cab": [
       {
         "cabId": 301,
-        "cabCode": "PRD-ELE-1054",
-        "cabImg": [
-          "https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"
-        ],
-        "cabTitle": "Pontiac 2023 - A Nice 6-Seater Red Color  Car",
-        "cabDescription": "Easy upgrade for faster boot up, shutdown, application load and response",
-        "cabCategory": "Electronics",
-        "price": 300,
+        "cabColor": "Red",
+        "cabImg": ["https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"],
+        "cabTitle": "Pontiac 2023",
+        "cabDescription": "Pontiac 2023 - A Nice 6-Seater Red Color  Car",
+        "cabCategory": "6-Seater",
+        "price": 30,
         "quantity": 2,
-        "totalPrice": 600
+        "totalPrice": 60
       },
       {
         "cabId": 302,
-        "cabCode": "PRD-ELE-1054",
-        "cabImg": [
-          "https://m.media-amazon.com/images/I/61UdeL7aO-L._AC_SX679_.jpg"
-        ],
-        "cabTitle": "Corvette 2023 - A Cute 2-Seater Grey Color  Car",
-        "cabDescription": "Network-Ready, Energy Star Certified, Decal-Printing, Cloud Print Enabled",
-        "cabCategory": "Electronics",
-        "price": 1200,
+        "cabColor": "Grey",
+        "cabImg": ["https://m.media-amazon.com/images/I/61UdeL7aO-L._AC_SX679_.jpg"],
+        "cabTitle": "Corvette 2023",
+        "cabDescription": "Corvette 2023 - An awesome 4-Seater Grey Color  Car",
+        "cabCategory": "4-Seater",
+        "price": 60,
         "quantity": 1,
-        "totalPrice": 1200
+        "totalPrice": 60
       }
     ],
     "totalItems": 1,
-    "itemsSubTotal": 2300,
-    "shipmentCharges": 300,
-    "totalAmount": 2600,
+    "itemsSubTotal": 120,
+    "travelCharges": 300,
+    "totalAmount": 420,
     "paymentStatus": 0,
     "paymentStatusTile": "Confirmed",
     "paymentMethod": 0,

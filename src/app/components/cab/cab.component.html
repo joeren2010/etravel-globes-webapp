@@ -23,20 +23,22 @@
                      <tr>
                         <th scope="col">S/N</th>
                         <th scope="col">Cab Id</th>
+                        <th scope="col">Color</th>
                         <th scope="col">Model</th>
                         <th scope="col">Details</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Base Price</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Price</th>
+                        <th scope="col" style="text-indent:120px">Actions</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let cab of cabObservable | async; index as idx">
                         <td>{{ idx + 1 }}</td>
                         <!-- names used below must match names used in your data table -->
-                        <td>{{ cab["cabCode"] }}</td>
-                        <td class="text-wrap">{{ cab["cabTitle"] }}</td>
-                        <td class="text-wrap">{{ cab["cabDescription"] }}</td>
+                        <td>{{ cab["cabId"] }}</td>
+                        <td>{{ cab["cabColor"] }}</td>
+                        <td>{{ cab["cabTitle"] }}</td>
+                        <td class="text-wrap" class="col-12 col-sm-7">{{ cab["cabDescription"] }}</td>
                         <td>{{ cab["cabCategory"]["categoryName"] }}</td>
                         <td>{{ cab["price"] | currency:'USD':'symbol':'1.0' }}</td>
                         <td>
@@ -74,9 +76,15 @@
          <div class="row">
             <div class="col-12 col-sm-4">
                <div class="form-group m-0 mb-2">
+                  <label for="cabId" class="text-sm">Cab Id</label>
+                  <input type="text" name="cabId" formControlName="cabId" class="form-control"
+                     placeholder="enter cab id" required>
+               </div>
+               <!-- <div class="col-12 col-sm-4"> -->
+               <div class="form-group m-0 mb-2">
                   <label for="name" class="text-sm">Model</label>
                   <input type="text" name="cabTitle" formControlName="cabTitle" class="form-control"
-                     placeholder="enter cab model or name" required>
+                     placeholder="enter cab model e.g: Corvette 2023" required>
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="name" class="text-sm">Category</label>
@@ -95,9 +103,9 @@
                      placeholder="enter cab base price" required>
                </div>
                <div class="form-group m-0 mb-2">
-                  <label for="cabCode" class="text-sm">Cab Id</label>
-                  <input type="text" name="cabCode" formControlName="cabCode" class="form-control"
-                     placeholder="enter cab id or code" min="1" required>
+                  <label for="cabColor" class="text-sm">Cab Color</label>
+                  <input type="text" name="cabColor" formControlName="cabColor" class="form-control"
+                     placeholder="enter color of cab" min="1" required>
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="status" class="text-sm">Status</label><br>
@@ -117,7 +125,7 @@
                <div class="form-group m-0 mb-2">
                   <label for="description" class="text-sm">Description</label>
                   <textarea id="description" name="cabDescription" id="adress" rows="4" class="form-control"
-                     formControlName="cabDescription" placeholder="enter cab color and other info"></textarea>
+                     formControlName="cabDescription" placeholder="enter some info about the cab"></textarea>
                </div>
                <div class="col-12 px-0">
                   <div class="d-flex flex-column">
@@ -198,7 +206,7 @@
       </div>
       <div class="d-flex flex-column mb-1">
          <span class="text-sm text-muted">Base Price</span>
-         <p>&#8377;{{ cabModel?.price }}</p>
+         <p>&#36;{{ cabModel?.price }}</p>
       </div>
       <div class="d-flex flex-column mb-1">
          <span class="text-sm text-muted">Description</span>

@@ -1,1 +1,51 @@
-<p>resvcab works!</p>
+<div class="container-fluid mt-2">
+   <div class="row w-100 m-0" *ngIf="fetching">
+      <div class="col-12 d-flex justify-content-center align-items-center">
+         <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+   </div>
+   <div class="row w-100 m-0 mt-2" *ngIf="!fetching">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let cab of cabs">
+         <div class="card shadow-sm" style="height: 100%;">
+            <!-- <img [src]="cab['image']" alt="" class="card-img-top img"> -->
+            <img [src]="cab['cabCategory']['categoryImageUrl']" [alt]="" class="card-img-top img">
+            <div class="card-body">
+               <h5 class="m-0 font-weight-bold card-title">
+                  <strong>{{ cab["cabTitle"] }}</strong>
+               </h5>
+               <p class="card-text text-limit">
+                  <td>
+                     <dl>
+                        {{ ["Type: "] }} {{ cab["cabCategory"]["categoryName"] }}
+                        {{ [" || "] }}
+                        {{ ["Color: "] }} {{ cab["cabColor"] }}
+                        <!-- {{ [" || "] }} -->
+                        <li>
+                           {{ ["Cab Id: "] }} {{ cab["cabId"] }}
+                           {{ [" || "] }}
+                           {{ ["Base Price: "] }} {{ cab["price"] | currency:'USD':'symbol':'1.0' }}
+                        </li>
+                        <li>{{ cab["cabDescription"] }}</li>
+                     </dl>
+                  </td>
+               </p>
+            </div>
+            <div class="card-footer bg-white border-0">
+               <div class="d-flex justify-content-evenly align-items-center">
+                  <button type="button" class="btn btn-sm btn-dark mr-2">
+                     Book Now
+                  </button>
+                  <button type="button" class="btn btn-sm btn-dark mr-2" (click)="addCabToCart(cab)">
+                     Add to Cart
+                  </button>
+                  <button type="button" class="btn btn-sm btn-dark" (click)="addCabToWishlist(cab)">
+                     Add to Wishlist
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,18 +1,18 @@
 [
-    {
-      "categoryId": 1,
-      "categoryName": "Electronics",
-      "categoryDescription": "The field of electronics is a branch of physics and electrical engineering that deals with the emission.",
-      "categoryImageUrl": ["https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"],
-      "active": true,
-      "addedOn": "10 August 2020"
-    },
-    {
-        "categoryId": 2,
-        "categoryName": "Gifts & Crafts",
-        "categoryDescription": "The field of electronics is a branch of physics and electrical engineering that deals with the emission.",
-        "categoryImageUrl": ["https://m.media-amazon.com/images/I/61UdeL7aO-L._AC_SX679_.jpg"],
-        "active": false,
-        "addedOn": "11 August 2020"
-      }
+  {
+    "categoryId": 501,
+    "categoryName": "6-Seater",
+    "categoryDescription": "Larger capacity for your family... helps you to make few trips",
+    "categoryImageUrl": ["https://m.media-amazon.com/images/I/71J4Q8zM72L._SX466_.jpg"],
+    "active": true,
+    "addedOn": "10 August 2020"
+  },
+  {
+    "categoryId": 502,
+    "categoryName": "4-Seater",
+    "categoryDescription": "Standard car capacity, that lets your family... to travel in style",
+    "categoryImageUrl": ["https://m.media-amazon.com/images/I/61UdeL7aO-L._AC_SX679_.jpg"],
+    "active": false,
+    "addedOn": "11 August 2020"
+  }
 ]

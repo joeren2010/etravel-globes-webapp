@@ -40,11 +40,27 @@
             <li class="nav-item">
                <a class="nav-link" routerLink="/cart" [skipLocationChange]="true">
                   CART
+                  <!-- <span class="badge badge-light ml-1" *ngIf="resvcabService.cartCabs.length !== 0"> 
+                     {{resvcabService.cabs.length || 0 }}
+                  </span> -->
+                  <span *ngIf="resvcabService.cabs.length !==0"
+                     class="position-absolute top-2 start-10 translate-middle badge rounded-pill bg-danger">
+                     {{resvcabService.cabs.length || 0}}
+                     <span class="visually-hidden">unread messages</span>
+                  </span>
                </a>
             </li>
             <li class="nav-item">
                <a class="nav-link" routerLink="/wishlist" [skipLocationChange]="true">
                   WISHLIST
+                  <!-- <span class="badge badge-light ml-1" *ngIf="resvcabService.wishlistCabs.length !== 0"> 
+                     {{resvcabService.wishlistCabs.length || 0 }}
+                  </span>-->
+                  <span *ngIf="resvcabService.wishlistCabs.length !==0"
+                     class="position-absolute top-2 start-10 translate-middle badge rounded-pill bg-danger">
+                     {{resvcabService.wishlistCabs.length || 0}}
+                     <span class="visually-hidden">unread messages</span>
+                  </span>
                </a>
             </li>
             <div *ngIf="loggedIn">

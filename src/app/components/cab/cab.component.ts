@@ -28,7 +28,7 @@ export class CabComponent implements OnInit {
     private cabService: CabService, 
     private cabcategoryService:CabcategoryService, 
     private modalService: NgbModal, 
-    private fb: FormBuilder
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -47,12 +47,12 @@ export class CabComponent implements OnInit {
   initialiseModal(cabObj: Cab | null) {
     if (cabObj == null) {
       this.updation = false;
-      this.cabForm = this.fb.group({
+      this.cabForm = this.formBuilder.group({
         cabId: [],
         cabTitle: [null],
         price: [null],
-        cabCode: [null],
-        images: this.fb.array([]),
+        cabColor: [null],
+        images: this.formBuilder.array([]),
         thumbnailImage: [null],
         cabDescription: [null],
         cabCategory: [null],
@@ -62,11 +62,11 @@ export class CabComponent implements OnInit {
       });
     } else {
       this.updation = true;
-      this.cabForm = this.fb.group({
+      this.cabForm = this.formBuilder.group({
         cabId: [cabObj.cabId],
         cabTitle: [cabObj.cabTitle],
         price: [cabObj.price],
-        cabCode: [cabObj.cabCode],
+        cabColor: [cabObj.cabColor],
         images: [cabObj.images],
         thumbnailImage: [cabObj.thumbnailImage],
         cabDescription: [cabObj.cabDescription],
@@ -167,7 +167,7 @@ export class CabComponent implements OnInit {
 export interface Cab {
   cabId?: string;
   cabTitle?: string;
-  cabCode?: string;
+  cabColor?: string;
   cabDescription?: string;
   price?: number;
   cabCategory?: cabCategory;

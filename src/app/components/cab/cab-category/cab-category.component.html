@@ -26,15 +26,17 @@
                   <thead class="thead-light">
                      <tr>
                         <th scope="col">S/N</th>
+                        <th scope="col">Cat Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col" style="text-indent:70px">Actions</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let cat of cabcategoryObservable | async; index as idx">
                         <th scope="row">{{idx+1}}</th>
+                        <td>{{cat["categoryId"]}}</td>
                         <td>{{cat["categoryName"]}}</td>
                         <td class="col-12 col-sm-9">{{cat["categoryDescription"]}}</td>
                         <td>
@@ -70,6 +72,11 @@
    <div class="modal-body">
       <form [formGroup]="cabCategoryForm" ngNativeValidate>
          <div class="modal-body">
+            <div class="form-group col mt-2">
+               <label>Cat Id</label>
+               <input type="text" class="form-control" name="categoryId" formControlName="categoryId"
+                  placeholder="enter category id">
+            </div>
             <div class="form-group col mt-2">
                <label>Title</label>
                <input type="text" class="form-control" name="title" formControlName="categoryName"
