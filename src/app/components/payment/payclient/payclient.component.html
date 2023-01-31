@@ -1,1 +1,72 @@
-<p>payclient works!</p>
+<div class="row w-100 m-0 mt-2">
+   <div class="col-12 col-sm-4 order-0 order-sm-1">
+      <div class="card">
+         <div class="card-header bg-white">
+            <h4 class="card-title m-0">Order Summary</h4>
+         </div>
+         <div class="card-body">
+            <p class="card-text d-flex justify-content-between text-danger">
+               <span class="text-muted text-sm">Order Total</span>
+               <span class="font-weight-bold">{{ totalPrice || 0 | currency:'USD':'symbol' }}</span>
+            </p>
+         </div>
+      </div>
+      <div class="card shadow-sm mt-2">
+         <div class="card-header bg-white">
+            <h4 class="card-title m-0">Billing Address</h4>
+         </div>
+         <div class="card-body">
+            <p class="card-text d-flex flex-column">
+               <span class="text-muted text-sm">Street</span>
+               <span class="font-weight-bold">3950 Alma Ave, Apt 54</span>
+            </p>
+            <p class="card-text d-flex flex-column">
+               <span class="text-muted text-sm">City</span>
+               <span class="font-weight-bold">Denver</span>
+            </p>
+            <p class="card-text d-flex flex-column">
+               <span class="text-muted text-sm">State</span>
+               <span class="font-weight-bold">Colorado</span>
+            </p>
+            <p class="card-text d-flex flex-column">
+               <span class="text-muted text-sm">Zip Code</span>
+               <span class="font-weight-bold">81025</span>
+            </p>
+         </div>
+      </div>
+   </div>
+   <div class="col-12 col-sm-8 order-1 order-sm-0">
+      <div class="card shadow-sm">
+         <div class="card-header bg-white">
+            <h4 class="card-title m-0">Payment Method</h4>
+         </div>
+         <div class="card-body">
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item">
+                  <h5 class="mb-1">Add Credit/Debit Card
+                     <img [src]="imageSrc" [alt]="imageSrc" *ngFor="let imageSrc of cardImages; index as idx"
+                        class="img-fluid mr-2 my-2" height="40px" width="40px">
+                  </h5>
+                  <p class="mb-1">save your credit/debit cards... for future
+                     <button type="button" class="btn btn-sm btn-primary mr-2"><strong>Pay Now</strong></button>
+                  </p>
+               </li>
+               <li class="list-group-item">
+                  <h5 class="mb-1">Pay With Online Bank</h5>
+                  <p class="mb-1">expect possible delays due to processing time</p>
+               </li>
+               <li class="list-group-item">
+                  <h5>Other Payment Method</h5>
+                  <p class="mb-1">pay with paypal, apple pay, google pay, etc
+                     <button type="button" class="btn btn-sm btn-success mr-2"><strong>Pay Now</strong></button>
+                  </p>
+               </li>
+               <li class="list-group-item">
+                  <h5>Pay On Delivery</h5>
+                  <p class="mb-1">pay digitally with your sms pay link</p>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>

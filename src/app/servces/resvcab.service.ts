@@ -72,7 +72,7 @@ export class ResvcabService {
 
   // add cab to whishlist
   addCabToWishlist(cab:any, cabRemoveBool: boolean = false, cabIdx: number =-1) {
-    if(!this.wishlistCabs.some(x=>x["cabId"]===cab["cabId"])) {
+    if(!this.wishlistCabs.some(x => x["cabId"] === cab["cabId"])) {
       this.wishlistCabs.push({
         ...cab, "quantity":1
       });

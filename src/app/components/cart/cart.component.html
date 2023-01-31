@@ -18,8 +18,10 @@
             <div class="card-body">
                <div class="row w-100 m-0">
                   <div class="col-12 col-sm-2 d-flex justify-content-center align-items-center">
-                     <img [src]="cab['cabCategory']['categoryImageUrl']" [alt]="cab['cabTitle']" class="img-fluid"
-                        width="128px" height="128px">
+                     <img [src]="cab['images'][0]" [alt]="cab['cabTitle']" class="img-fluid" width="128px"
+                        height="128px">
+                     <!-- <img [src]="cab['cabCategory']['categoryImageUrl']" [alt]="cab['cabTitle']" class="img-fluid"
+                        width="128px" height="128px"> -->
                   </div>
                   <div class="col-12 col-sm-10 mt-2 mt-sm-0">
                      <div class="d-flex flex-column">
@@ -62,17 +64,17 @@
          <div class="card-body">
             <div class="d-flex flex-column">
                <p class="card-text d-flex justify-content-between m-0 mb-2">
-                  <span class="text-muted">Total Items</span>
+                  <span class="text-muted">Total Items:</span>
                   <span class="font-weight-bold">{{ totalItems || 0 }}</span>
                </p>
                <p class="card-text d-flex justify-content-between m-0 mb-2">
-                  <span class="text-muted">Total Price</span>
+                  <span class="text-muted">Total Price:</span>
                   <span class="font-weight-bold">{{ totalPrice || 0 | currency:'USD':'symbol' }}</span>
                </p>
             </div>
          </div>
          <div class="card-footer bg-white border-0">
-            <button type="button" class="btn btn-sm btn-dark w-100" routerLink="/checkout"
+            <button type="button" class="btn btn-sm btn-dark w-100" routerLink="/payment/payclient"
                [disabled]="resvcabService.cabs.length === 0">
                Proceed To Payment
             </button>

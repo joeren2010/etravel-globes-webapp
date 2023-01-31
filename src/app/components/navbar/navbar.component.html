@@ -97,60 +97,60 @@
                      </li>
                   </ul>
                </div>
-               <div *ngIf="loggedInClient">
-                  <ul class="navbar-nav ml-auto mr-20">
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                           MY RESV
+               <!-- <div *ngIf="loggedInClient"> -->
+               <ul class="navbar-nav ml-auto mr-20">
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        MY RESV
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/resv/resvclient" [skipLocationChange]="true">
+                           <strong>My Reservations</strong>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" routerLink="/resv/resvclient" [skipLocationChange]="true">
-                              <strong>My Reservations</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/cab/cabcatclient" [skipLocationChange]="true">
-                              <strong>Cabs Categories</strong>
-                           </a>
-                        </div>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/offer/offerclient" [skipLocationChange]="true">
-                           OFFERS
+                        <a class="dropdown-item" routerLink="/cab/cabcatclient" [skipLocationChange]="true">
+                           <strong>Cabs Categories</strong>
                         </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/payment/payclient" [skipLocationChange]="true">
-                           PAYMENT
+                     </div>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" routerLink="/offer/offerclient" [skipLocationChange]="true">
+                        OFFERS
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" routerLink="/payment/payclient" [skipLocationChange]="true">
+                        PAYMENT
+                     </a>
+                  </li>
+                  <li>
+                     <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">SEARCH</button>
+                     </form>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <strong>CLIENT ACCT</strong>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
+                           <strong>Update Profile</strong>
                         </a>
-                     </li>
-                     <li>
-                        <form class="d-flex">
-                           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                           <button class="btn btn-outline-light" type="submit">SEARCH</button>
-                        </form>
-                     </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                           <strong>CLIENT ACCT</strong>
+                        <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
+                           <strong>New Password</strong>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" routerLink="/auth/myprofile" [skipLocationChange]="true">
-                              <strong>Update Profile</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/auth/newpasswd" [skipLocationChange]="true">
-                              <strong>New Password</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
-                              <strong>Update Setting</strong>
-                           </a>
-                           <a class="dropdown-item" routerLink="#" (click)="logoutClient()" [skipLocationChange]="true">
-                              <strong>Clients Signout</strong>
-                           </a>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
+                        <a class="dropdown-item" routerLink="/auth/mysetting" [skipLocationChange]="true">
+                           <strong>Update Setting</strong>
+                        </a>
+                        <a class="dropdown-item" routerLink="#" (click)="logoutClient()" [skipLocationChange]="true">
+                           <strong>Clients Signout</strong>
+                        </a>
+                     </div>
+                  </li>
+               </ul>
+               <!-- </div> -->
                <div *ngIf="loggedInDriver">
                   <ul class="navbar-nav ml-auto mr-20">
                      <li class="nav-item dropdown">
