@@ -1,3 +1,65 @@
+<!-- <div class="col-12 col-sm-8 order-1 order-sm-0"> -->
+<div class="container-fluid mt-2">
+   <div class="row w-100 m-0 mt-2">
+      <div class="col-12 col-sm-8 order-0 order-sm-1">
+         <div class="card shadow-sm-1">
+            <div class="card-body p-1">
+               <form [formGroup]="rescForm" id="rescform">
+                  <!-- <form [formGroup]="rescForm" id="rescform" action="cart.component.html" method="POST"> -->
+                  <div class="form-group col-12 mt-2">
+                     <div class="row">
+                        <div class="col">
+                           <input type="text" class="form-control" name="pickupLoc" formControlName="pickupLoc"
+                              placeholder="Pickup Location" id="pickupLoc" required>
+                        </div>
+                        <div class="col">
+                           <input type="date" class="form-control" name="pickupDate" formControlName="pickupDate"
+                              formControlName="pickupDate" placeholder="Pickup Date" min="{{minDate}}">
+                        </div>
+                        <div class="col">
+                           <input type="text" class="form-control" name="pickupTime" formControlName="pickupTime"
+                              formControlName="pickupTime" [ngxTimepicker]="picker1" placeholder="Pickup Time">
+                           <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group col-12 mt-2">
+                     <div class="row">
+                        <div class="col">
+                           <input type="text" class="form-control" name="dropoffLoc" formControlName="dropoffLoc"
+                              placeholder="Dropoff Location" required>
+                        </div>
+                        <div class="col">
+                           <input type="date" class="form-control" name="dropoffDate" formControlName="dropoffDate"
+                              formControlName="dropoffDate" placeholder="Dropoff Date" min="{{minDate}}">
+                        </div>
+                        <div class="col">
+                           <input type="text" class="form-control" name="dropoffTime" formControlName="dropoffTime"
+                              formControlName="dropoffTime" [ngxTimepicker]="picker2" placeholder="Dropoff Time">
+                           <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="col-12 col-sm-1 order-0 order-sm-1">
+         <div class="card shadow-sm text-center">
+            <div class="card-body p-2">
+               <!-- <button type="submit" class="btn btn-success" (click)="saveResc()">
+                  <strong>Click Here.. Select Your Desired Car</strong>
+               </button> -->
+               <button type="submit" class="btn btn-light" disabled>
+                  <strong>Enter Info... Select Your Desired Car</strong>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
 <div class="container-fluid mt-2">
    <div class="row w-100 m-0" *ngIf="fetching">
       <div class="col-12 d-flex justify-content-center align-items-center">
@@ -21,7 +83,6 @@
                         {{ ["Type: "] }} {{ cab["cabCategory"]["categoryName"] }}
                         {{ [" || "] }}
                         {{ ["Color: "] }} {{ cab["cabColor"] }}
-                        <!-- {{ [" || "] }} -->
                         <li>
                            {{ ["Cab Id: "] }} {{ cab["cabId"] }}
                            {{ [" || "] }}
@@ -34,14 +95,14 @@
             </div>
             <div class="card-footer bg-white border-0">
                <div class="d-flex justify-content-evenly align-items-center">
+                  <button type="button" class="btn btn-sm btn-dark mr-2" (click)="addCabToCart(cab)"
+                     (click)="saveResc()"> Add To Cart
+                  </button>
+                  <button type="button" class="btn btn-sm btn-dark" (click)="addCabToWishlist(cab)"
+                     (click)="saveResc()"> Add To Wishlist
+                  </button>
                   <button type="button" class="btn btn-sm btn-dark mr-2">
-                     Book Now
-                  </button>
-                  <button type="button" class="btn btn-sm btn-dark mr-2" (click)="addCabToCart(cab)">
-                     Add to Cart
-                  </button>
-                  <button type="button" class="btn btn-sm btn-dark" (click)="addCabToWishlist(cab)">
-                     Add to Wishlist
+                     Reset Or Cancel
                   </button>
                </div>
             </div>

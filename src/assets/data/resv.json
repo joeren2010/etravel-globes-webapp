@@ -31,7 +31,10 @@
     "clientPhone": "719-456-1132",
     "clientAddress": "ABC Ludhiana 1414001",
     "driverName": "Carl Lewis",
-    "driverId": 201
+    "driverId": 201, 
+    "unitPrice": 0.55,
+    "tripDistance": 75,
+    "pickupLoc2": "Pueblo, CO"    
   },
   {
     "resvId": 402,
@@ -76,6 +79,9 @@
     "clientPhone": "222-777-5555",
     "clientAddress": "XYZ Ludhiana 1414001",
     "driverName": "Ben Johnson",
-    "driverId": 202
+    "driverId": 202,
+    "unitPrice": 0.55,
+    "tripDistance": 75,
+    "pickupLoc2": "Tucson, AZ"   
   }
 ]

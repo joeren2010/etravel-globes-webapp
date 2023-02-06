@@ -24,7 +24,11 @@
         "thumbnailImage": 0,
         "price": 30,
         "addedOn": "October 25 2021",
-        "rating": 4
+        "rating": 4,  
+        "unitPrice": 0.50,
+        "tripDistance": 100,
+        "travelCharges": 50,
+        "itemsSubTotal": 80                    
     }, 
     {
         "cabId": 302,
@@ -51,7 +55,11 @@
         "thumbnailImage": 0,
         "price": 60,
         "addedOn": "November 01 2021",
-        "rating": 4.5
+        "rating": 4.5,
+        "unitPrice": 0.50,
+        "tripDistance": 250,
+        "travelCharges": 0,         
+        "itemsSubTotal": 0
     },
     {
         "cabId": 303,
@@ -78,6 +86,10 @@
         "thumbnailImage": 0,
         "price": 45,
         "addedOn": "August 12 2021",
-        "rating": 4
+        "rating": 4,
+        "unitPrice": 0.50,
+        "tripDistance": 50,
+        "travelCharges": 0,         
+        "itemsSubTotal": 0         
     }
 ]

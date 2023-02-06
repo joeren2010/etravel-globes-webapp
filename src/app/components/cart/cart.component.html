@@ -28,16 +28,47 @@
                         <h5 class="m-0 font-weight-bold card-title mb-1">
                            <strong>{{ cab["cabTitle"] }}</strong>
                         </h5>
-                        <p class="card-text text-limit m-0 mb-1">
+                        <p class="card-text text-limit m-0 mb-0">
                            {{ cab["cabDescription"] }}
                         </p>
-                        <p class="card-text m-0 mb-1">
-                           <span class="text-muted mr-2">Qty: </span>
+                        <p class="card-text m-0 mb-0">
+                           <span class="text-muted mr-2">Base Price: </span>
+                           <span class="font-weight-bold">{{ cab["price"] | currency:'USD':'symbol' }}</span>
+                           {{ [" || "] }}
+                           <span class="text-muted mr-2">Quantity: </span>
                            <span class="font-weight-bold mr-2">{{ cab["quantity"] }}</span>
                         </p>
+                        <p class="card-text m-0 mb-0">
+                           <span class="text-muted mr-2">Pickup Loc.: </span>{{ getPickupLoc() }}
+                           {{ [" || "] }}
+                           <span class="text-muted mr-2">Pickup Date: </span>{{ getPickupDate() }}
+                           {{ [" || "] }}
+                           <span class="text-muted mr-2">Pickup Time: </span>{{ getPickupTime() }}
+                        </p>
+                        <p class="card-text m-0 mb-0">
+                           <span class="text-muted mr-2">Dropoff Loc.: </span>{{ getDropoffLoc() }}
+                           {{ [" || "] }}
+                           <span class="text-muted mr-2">Dropoff Date: </span>{{ getDropoffDate() }}
+                           {{ [" || "] }}
+                           <span class="text-muted mr-2">Dropoff Time: </span>{{ getDropoffTime() }}
+                        </p>
                         <p class="card-text m-0 mb-3">
-                           <span class="text-muted mr-2">Price: </span>
-                           <span class="font-weight-bold">{{ cab["price"] | currency:'USD':'symbol' }}</span>
+                           <span class="text-muted">Trip Distance: </span>
+                           <span class="font-weight-bold">{{ cab["tripDistance"] || 0 }}</span>
+                           {{ [" || "] }}
+                           <span class="text-muted">Travel Cost: </span>
+                           <span class="font-weight-bold">
+                              {{ cab['travelCharges'] | currency:'USD':'symbol' || 0}}
+                           </span>
+                           <!-- <span class="text-muted mr-2">Travel Cost: </span>
+                           <span>{{ travelcost() | currency:'USD':'symbol' || 0}}</span> -->
+                           {{ [" || "] }}
+                           <span class="text-muted">Sub Total: </span>
+                           <span class="font-weight-bold">
+                              {{ cab['itemsSubTotal'] | currency:'USD':'symbol' || 0}}
+                           </span>
+                           <!-- <span class="text-muted mr-2">Sub Total: </span>
+                           <span>{{ subtotal() | currency:'USD':'symbol' || 0}}</span> -->
                         </p>
                      </div>
                      <div class="d-flex align-items-center">
@@ -74,7 +105,7 @@
             </div>
          </div>
          <div class="card-footer bg-white border-0">
-            <button type="button" class="btn btn-sm btn-dark w-100" routerLink="/payment/payclient"
+            <button type="button" class="btn btn-sm btn-dark w-100" routerLink="/payment"
                [disabled]="resvcabService.cabs.length === 0">
                Proceed To Payment
             </button>
@@ -82,3 +113,28 @@
       </div>
    </div>
 </div>
+
+
+
+<!-- <span class="text-muted mr-2">Trip Distance: </span>{{ getCalc() }} -->
+<!-- <span class="text-muted mr-2">Travel Cost: </span>{{ getCalc() }} -->
+<!-- <span class="text-muted mr-2">Sub Total: </span>{{ getCalc() }} -->
+
+
+<!-- <span class="text-muted">Travel Cost: </span>
+<span class="font-weight-bold">
+   {{ cab.travelCharges | currency:'USD':'symbol' || 0}}
+</span> -->
+
+<!-- <span class="font-weight-bold">
+   {{ cab["travelCharges"] | currency:'USD':'symbol' || 0}}
+</span> -->
+
+<!-- <span class="font-weight-bold">
+   {{ cab["itemsSubTotal"] | currency:'USD':'symbol' || 0 }}
+</span> -->
+
+<!-- <span class="text-muted">Sub Total: </span>
+<span class="font-weight-bold">
+   {{ cab.itemsSubTotal | currency:'USD':'symbol' || 0 }}
+</span> -->

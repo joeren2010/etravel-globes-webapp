@@ -4,7 +4,7 @@
          <div class="card shadow-sm">
             <div class="card-header bg-white border-0">
                <div class="row">
-                  <div class="col-12">
+                  <div class="col-12 col-sm-6">
                      <div class="d-flex flex-column align-items-start">
                         <h4>Reservations</h4>
                         <!-- <div class="d-flex flex-wrap">
@@ -18,7 +18,15 @@
                         </div> -->
                      </div>
                   </div>
+                  <div class="col-12 col-sm-6">
+                     <div class="d-flex justify-content-end align-items-center">
+                        <button type="submit" class="btn btn-secondary mr-1" (click)="locStorage()">
+                           <strong>Cleanout Local Storage</strong>
+                        </button>
+                     </div>
+                  </div>
                </div>
+
             </div>
             <div class="table-responsive mt-3">
                <table class="table table-flush m-0">

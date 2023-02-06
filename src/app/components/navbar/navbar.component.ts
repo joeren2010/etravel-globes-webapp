@@ -76,4 +76,5 @@ export class NavbarComponent implements OnInit {
     this.adminService.logOut();
     this.router.navigate(["admin"]);     //after logout... reroutes to login page
   }
+
 }

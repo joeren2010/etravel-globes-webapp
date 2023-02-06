@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -23,8 +24,8 @@ export class ResvcabService {
 
   public cabs:any[] =[];
   public wishlistCabs:any[] =[];
-  public savedItems: any[] = []; 
   public cabsRetreived: boolean = false;
+  public savedItems: any[] = []; 
   
   public cabsSub: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
@@ -32,6 +33,11 @@ export class ResvcabService {
     private httpClient: HttpClient,
     private toast: ToastrService
   ) { }
+
+  storeResc(resc:any): Observable<string>{
+    console.log(resc); 
+    return this.httpClient.post(this.urlPostResc, resc, {responseType:'text'});
+  }
 
   getCabs() {
     if (!this.cabsRetreived) {
@@ -46,18 +52,22 @@ export class ResvcabService {
     }
   }
 
+
   // add cabs to cart
   addCabToCart(cab:any, cabRemoveBool: boolean = false, cabIdx: number =-1) {
     // add cab into cart for multiple time.
     if(this.cabs.some(x => x["cabId"] === cab["cabId"])) { 
       let idx = this.cabs.findIndex(x=> x["cabId"] === cab["cabId"]);
       this.cabs[idx]["quantity"] +=1;
-      //console.log(cab['title'], "Already Added To Cart, Quantity Updated");
+      this.cabs[idx]["travelCharges"] =this.cabs[idx]["unitPrice"] * this.cabs[idx]["tripDistance"] * this.cabs[idx]["quantity"]
+      this.cabs[idx]["itemsSubTotal"] =(this.cabs[idx]["unitPrice"] * this.cabs[idx]["tripDistance"] * this.cabs[idx]["quantity"]) + (this.cabs[idx]["price"] * this.cabs[idx]["quantity"])
       this.toast.info(cab['title'], "Already Added To Cart, Quantity Updated")
     } else{
       this.cabs.push( {
         ...cab,
-        "quantity": 1
+        "quantity": 1,
+        "travelCharges": cab['unitPrice'] * cab['tripDistance'],
+        "itemsSubTotal": ( cab['unitPrice'] * cab['tripDistance']) + cab['price'] 
       });
       //console.log(cab['title'], "Cab Added To Cart");
       this.toast.success(cab['title'], "Cab Added To Cart");
@@ -67,7 +77,7 @@ export class ResvcabService {
       this.wishlistCabs.splice(cabIdx, 1);
       this.savedItems.splice(cabIdx, 1);
     }
-    // this.cabsSub.next([...this.cartCabs]);
+    // this.cabsSub.next([...this.Cabs]);
   }
 
   // add cab to whishlist
@@ -102,4 +112,41 @@ export class ResvcabService {
       this.cabs.splice(cabIdx, 1);
     }
   }
+
 }
+
+
+  // public unitPrice: number = 0;  
+  // public tripDistance: number = 0;
+  // public travelCharges: number = 0;
+  // public itemsSubTotal: number = 0;  
+  // calcTravelCost() {
+  //   this.travelCharges = this.cabs.reduce((prev, next) => prev + (next['unitPrice'] * next['tripDistance']), 0);
+  //   let travelCost = this.travelCharges;
+  //   this.itemsSubTotal = this.cabs.reduce((prev, next) => prev + ((next['price'] + travelCost) * next['quantity']), 0);
+  // } 
+
+  // this.calcTravelCost();
+  // // add cabs to cart
+  // addCabToCart(cab:any, cabRemoveBool: boolean = false, cabIdx: number =-1) {
+  //   // add cab into cart for multiple time.
+  //   if(this.cabs.some(x => x["cabId"] === cab["cabId"])) { 
+  //     let idx = this.cabs.findIndex(x=> x["cabId"] === cab["cabId"]);
+  //     this.cabs[idx]["quantity"] +=1;
+  //     //console.log(cab['title'], "Already Added To Cart, Quantity Updated");
+  //     this.toast.info(cab['title'], "Already Added To Cart, Quantity Updated")
+  //   } else{
+  //     this.cabs.push( {
+  //       ...cab,
+  //       "quantity": 1
+  //     });
+  //     //console.log(cab['title'], "Cab Added To Cart");
+  //     this.toast.success(cab['title'], "Cab Added To Cart");
+  //   }
+
+  //   if(cabRemoveBool) {
+  //     this.wishlistCabs.splice(cabIdx, 1);
+  //     this.savedItems.splice(cabIdx, 1);
+  //   }
+  //   // this.cabsSub.next([...this.cartCabs]);
+  // }

@@ -32,20 +32,32 @@
                            {{ cab["cabDescription"] }}
                         </p>
                         <p class="card-text m-0 mb-1">
-                           <span class="text-muted mr-2">Qty: </span>
+                           <span class="text-muted mr-2">Base Price: </span>
+                           <span class="font-weight-bold">{{ cab["price"] | currency:'USD':'symbol' }}</span>
+                           {{ [" || "] }}
+                           <span class="text-muted mr-2">Quantity: </span>
                            <span class="font-weight-bold mr-2">{{ cab["quantity"] }}</span>
                         </p>
                         <p class="card-text m-0 mb-3">
-                           <span class="text-muted mr-2">Price: </span>
-                           <span class="font-weight-bold">{{ cab["price"] | currency:'USD':'symbol' }}</span>
+                           <span class="text-muted">Trip Distance: </span>
+                           <span class="font-weight-bold">{{ cab["tripDistance"] || 0 }}</span>
+                           {{ [" || "] }}
+                           <span class="text-muted">Travel Cost: </span>
+                           <span class="font-weight-bold">
+                              {{ cab['travelCharges'] | currency:'USD':'symbol' || 0}}
+                           </span>
+                           {{ [" || "] }}
+                           <span class="text-muted">Sub Total: </span>
+                           <span class="font-weight-bold">
+                              {{ cab['itemsSubTotal'] | currency:'USD':'symbol' || 0}}
+                           </span>
                         </p>
-
                         <div class="d-flex align-items-center">
                            <button type="button" class="btn btn-sm btn-dark me-1"
                               (click)="resvcabService.addCabToCart(cab, true, idx)">
-                              Add To Cart</button>
+                              Add To Booking Cart</button>
                            <button type="button" class="btn btn-sm btn-danger me-1"
-                              (click)="removeCabFromWishlist(idx)">Remove</button>
+                              (click)="removeCabFromWishlist(idx)">Remove From Wishlist</button>
                         </div>
                      </div>
                   </div>

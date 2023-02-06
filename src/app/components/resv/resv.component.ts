@@ -79,6 +79,11 @@ export class ResvComponent implements OnInit {
     })
     //this.resvForm.reset();                       //resets the form 
   }
+
+  locStorage(){
+    sessionStorage.clear();
+    //sessionStorage['remove']('rescData');
+  }
 }
 
 
