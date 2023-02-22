@@ -22,6 +22,10 @@ export class ClientComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // loaddata(){
+  //   this.signUp()
+  // }
+
   signIn(){
     let client = this.clientRef.value;          //initializes the variable: admins   
     //console.log(admins);           

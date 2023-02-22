@@ -10,7 +10,7 @@ import { CabcategoryService } from 'src/app/servces/cabcategory.service';
   styleUrls: ['./cab-category.component.css']
 })
 export class CabCategoryComponent implements OnInit {
-  // category observable
+  // catergory observable
   public cabcategoryObservable: Observable<any[]> = new Observable();
   
   cabCategoryBool: boolean = true;
@@ -25,8 +25,12 @@ export class CabCategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cabcategoryObservable = this.cabcategoryService.getCategory();    
+    this.loaddata();   
   }
+
+  loaddata(){
+    this.cabcategoryObservable = this.cabcategoryService.getCategory();
+  }  
 
   
   openCabCategoryDialog(modelRef:any, cabCategoryObj = null) {
@@ -101,12 +105,29 @@ export class CabCategoryComponent implements OnInit {
     this.cabcategoryService.storeCategory(categoryRef).subscribe({
       next:(result:any) => console.log(result),
       error:(error:any) => console.log(error),
-      complete:() => console.log("completed")
+      complete:() => {
+        console.log("completed");
+        this.loaddata();
+      }
     });
-    this.cabCategoryForm.reset();
     this.tempFile.splice(0,this.tempFile.length); //reset the array 
     categoryRef.categoryImageUrl.splice(0,categoryRef.categoryImageUrl.length);        // reset the array
     categoryRef.categoryImageUrl="";
+    this.cabCategoryForm.reset();
   }
+
+  deleteCategory(categoryId:any){
+    //alert(cabId)
+    this.cabcategoryService.deleteCategory(categoryId).subscribe({
+      next:(data:any) => {
+        alert(data);
+      },
+      error:(error:any) => console.log(error),
+      complete:() => {
+        console.log("completed");
+        this.loaddata();
+      }
+    })
+  }    
 
 }

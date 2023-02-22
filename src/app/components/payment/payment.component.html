@@ -1,3 +1,70 @@
+<div class="container-fluid py-3">
+   <div class="row w-100 m-0">
+      <div class="card shadow-sm">
+         <div class="card-header bg-white border-0">
+            <div class="row">
+               <div class="col-12 col-sm-6">
+                  <div class="d-flex flex-column align-items-start">
+                     <h4>Booking Cart Summary</h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="table-responsive mt-3">
+            <table class="table table-flush m-0">
+               <thead class="thead-light">
+                  <tr>
+                     <th scope="col">Cart Id</th>
+                     <th>Added On</th>
+                     <th>Cab Name</th>
+                     <th>Cab Id</th>
+                     <th>Pickup Loc</th>
+                     <th>Pickup Date</th>
+                     <th>Pickup Time</th>
+                     <th>Dropoff Loc</th>
+                     <th>Dropoff Date</th>
+                     <th>Dropoff Time</th>
+                     <th>Qty</th>
+                     <th>Trip Dist</th>
+                     <th>Travel Cost</th>
+                     <th>Sub Total</th>
+                     <th style="text-indent:100px">Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let cart of cartObservable | async; index as idx">
+                     <th scope="row">{{idx+1}}</th>
+                     <td>{{cart["addedOn"] | date: 'yyyy-MM-dd'}}</td>
+                     <td>{{cart["cabTitle"]}}</td>
+                     <td>{{cart["cabId"]}}</td>
+                     <td>{{cart["pickupLoc"]}}</td>
+                     <td>{{cart["pickupDate"]}}</td>
+                     <td>{{cart["pickupTime"]}}</td>
+                     <td>{{cart["dropoffLoc"]}}</td>
+                     <td>{{cart["dropoffDate"]}}</td>
+                     <td>{{cart["dropoffTime"]}}</td>
+                     <td>{{cart["quantity"]}}</td>
+                     <td>{{cart["tripDistance"]}}</td>
+                     <td>{{cart["travelCharges"] | currency:'USD'}}</td>
+                     <td>{{cart["itemsSubTotal"] | currency:'USD'}}</td>
+                     <td>
+                        <ul>
+                           <button type="button" class="btn btn-sm btn-primary me-1 mb-1">
+                              <strong>Update Item</strong>
+                           </button>
+                           <button type="button" class="btn btn-sm btn-danger me-1 mb-1"
+                              (click)="deleteCart(cart.cartId)"><strong>Delete Item</strong>
+                           </button>
+                        </ul>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+
 <div class="row w-100 m-0 mt-2">
    <div class="col-12 col-sm-4 order-0 order-sm-1">
       <div class="card">

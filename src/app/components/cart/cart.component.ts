@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { CabService } from 'src/app/servces/cab.service';
+import { CartService } from 'src/app/servces/cart.service';
 import { ResvcabService } from 'src/app/servces/resvcab.service';
+import { Cab } from '../cab/cab.component';
 
 @Component({
   selector: 'app-cart',
@@ -9,52 +14,25 @@ import { ResvcabService } from 'src/app/servces/resvcab.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  public cartObservable: Observable<any[]> = new Observable();
   public totalItems: number = 0;
   public totalPrice: number = 0;
 
   constructor(
-    public resvcabService: ResvcabService, 
-    private toast: ToastrService
+    public cabService: CabService, 
+    public cartService: CartService, 
+    private toast: ToastrService,
+    public resvcabService: ResvcabService,
+    public router:Router 
   ) { }
 
   ngOnInit(): void {
-    this.calculate();
+    this.loaddata();
   }
 
-  // getRescData(){
-  //   let jsonData: any = sessionStorage.getItem('rescData');
-  //   let obj = JSON.parse(jsonData);
-  //   return jsonData;
-  // }
-  getPickupLoc(){
-    let jsonData: any = sessionStorage.getItem('rescData');
-    let obj = JSON.parse(jsonData);
-    return obj.pickupLoc;
-  }
-  getPickupDate(){
-    let jsonData: any = sessionStorage.getItem('rescData');
-    let obj = JSON.parse(jsonData);
-    return obj.pickupDate;
-  }
-  getPickupTime(){
-    let jsonData: any = sessionStorage.getItem('rescData');
-    let obj = JSON.parse(jsonData);
-    return obj.pickupTime;
-  }
-  getDropoffLoc(){
-    let jsonData: any = sessionStorage.getItem('rescData');
-    let obj = JSON.parse(jsonData);
-    return obj.dropoffLoc;
-  }
-  getDropoffDate(){
-    let jsonData: any = sessionStorage.getItem('rescData');
-    let obj = JSON.parse(jsonData);
-    return obj.dropoffDate;
-  }
-  getDropoffTime(){
-    let jsonData: any = sessionStorage.getItem('rescData');
-    let obj = JSON.parse(jsonData);
-    return obj.dropoffTime;
+  loaddata(){
+    this.calculate();
+    this.cartObservable = this.cartService.getAllCart();
   }
 
   addCabToWishlist(cab: any, removeBool: boolean, cabIdx: number) {
@@ -79,103 +57,64 @@ export class CartComponent implements OnInit {
     // this.totalPrice = this.resvcabService.cabs.reduce((prev, next) => prev + (next['price'] * next['quantity']), 0);
   }  
 
+  // save cart into database
+  saveCart(){                  
+    let cartData: any = sessionStorage.getItem('cartData');     
+    if(cartData){
+      let cartRef: Cart[] = JSON.parse((cartData) as any)||[];
+      console.log(cartRef);  
+      //let client = localStorage.getItem('client');
+      //let clientId = client && JSON.parse(client).id;
+      cartRef.forEach((cart:any, index: number) => {
+        let cartData: any = {
+          ...cart,
+          cartId: cart.id,
+          //clientId
+        } 
+        delete cartData.id;
+        setTimeout(() => {
+          this.cartService.storeCart(cartRef).subscribe({
+            next:(result:any) => {
+              if(result=="Cart Details stored successfully"){ 
+                alert("cart details stored successfully")
+                console.log(result);
+              }else {
+                alert("cart details didn't store")
+              }
+            },
+            error:(error:any) => console.log(error),
+            complete:() => {
+              console.log("completed");
+              //this.loaddata();
+            }
+          })   
+        }, 500);
+        if(cartRef.length===index+1){
+          sessionStorage.removeItem('cartData')  
+        }
+      })
+    }   
+    try {
+      setTimeout(() => {
+        this.router.navigate(["payment"]);   
+      }, 1000);  
+    }catch (err: any) {
+      console.log({message: err.message});
+    }                        
+    this.loaddata();            
+  } 
+
 }
 
-
-
-  // addCabToCart(cab: any, removeBool: boolean, cabIdx: number) {
-  //   this.resvcabService.addCabToCart(cab, removeBool, cabIdx);
-  //   //this.travelcost();
-  //   // this.subtotal();
-  // }
-
-  // travelcost() {
-  //   this.travelCharges = this.resvcabService.cabs.reduce((prev, next) => prev + next['quantity'], 0)
-  //   this.resvcabService.cabs.forEach((cab: any) => {
-  //     this.travelCharges = cab.unitPrice * (cab.tripDistance * cab.quantity);
-  //         console.log(cab.unitPrice);
-  //         console.log(cab.tripDistance);
-  //         console.log(cab.quantity);
-  //   });
-  //   console.log(this.travelCharges);
-  //   //return this.travelCharges;
-  //         this.resvcabService.cabs.push( {
-  //       //...cab,
-  //         })
-  // }   
-
-  // subtotal() {
-  //   this.resvcabService.cabs.forEach((cab: any) => {
-  //     this.itemsSubTotal = (cab.price * cab.quantity) + this.travelCharges;
-  //   });
-  //   //console.log(this.itemsSubTotal);
-  //   return this.itemsSubTotal;
-  // }  
-  // travelcost() {
-  //   this.resvcabService.cabs.forEach((cab: any) => {
-  //     this.travelCharges = cab.unitPrice * (cab.tripDistance * cab.quantity);
-  //         console.log(cab.unitPrice);
-  //         console.log(cab.tripDistance);
-  //         console.log(cab.quantity);
-  //   });
-  //   console.log(this.travelCharges);
-  //   return this.travelCharges;
-  // }  
-
-  // subtotal() {
-  //   this.resvcabService.cabs.forEach((cab: any) => {
-  //     this.itemsSubTotal = (cab.price * cab.quantity) + this.travelCharges;
-  //   });
-  //   //console.log(this.itemsSubTotal);
-  //   return this.itemsSubTotal;
-  // }  
-
-    
-  // calculate() {
-  //   this.totalItems = this.resvcabService.cabs.reduce((prev, next) => prev + next['quantity'], 0)
-  //   this.totalPrice = this.resvcabService.cabs.reduce((prev, next) => prev + (next[this.itemsSubTotal]), 0);
-  //   // this.totalPrice = this.resvcabService.cabs.reduce((prev, next) => prev + (next['price'] * next['quantity']), 0);
-  // }  
-
-//this.travelcost();
-//this.subtotal();
-
-// public unitPrice: number = 0;  
-// public tripDistance: number = 0;
-// public travelCharges: number = 0;
-// public itemsSubTotal: number = 0;
-// public quantity: number = 0;
-
-//this.travelCharges = 50;
-//this.travelCharges = this.resvcabService.cabs.reduce((prev, next) => prev + (next['unitPrice'] * next['tripDistance']), 0);
-// let travelCharges = this.travelCharges;
-// let unitPrice = this.unitPrice;
-// let tripDistance = this.tripDistance;
-// travelCharges = unitPrice * this.tripDistance;
-//let travelCost = this.travelCharges;
-//this.itemsSubTotal = this.resvcabService.cabs.reduce((prev, next) => prev + ((next['price'] + travelCost) * next['quantity']), 0);
-
-// let travelCost = this.resvcabService.cabs.reduce((prev, next) => prev + (next['unitPrice'] * next['tripDistance']), 0);
-// this.travelCharges = travelCost;
-// this.itemsSubTotal = this.resvcabService.cabs.reduce((prev, next) => prev + ((next['price'] + next['travelCharges']) * next['quantity']), 0);
-
-    // calcTravelCost() {
-//   //for(let cabIdx: number = 0; cabIdx<cab.length; cabIdx++) 
-//   this.resvcabService.cabs.forEach((_e: any) => {
-//     this.travelCharges = (_e.unitPrice * _e.tripDistance);
-//   });
-//   console.log(this.travelCharges);
-//   return this.travelCharges;
-// }  
-
-
-// calcTravelCost() {
-//   //for(let cabIdx: number = 0; cabIdx<cab.length; cabIdx++) 
-//   this.travelCharges = 0;
-//   this.resvcabService.cabs.forEach((_e: any) => {
-//     this.travelCharges = (_e.unitPrice * _e.tripDistance) * _e.quantity;
-//   });
-//   console.log(this.travelCharges);
-//   return this.travelCharges;
-// } 
-
+export interface Cart {
+  pickupLoc?: string;
+  pickupDate?: Date;
+  pickupTime?: string;
+  dropoffLoc?: string;
+  dropoffDate?: Date;
+  dropoffTime?: string;
+  unitPrice?: number;
+  tripDistance?: number;
+  travelCharges?: number;
+  itemsSubTotal?: number;
+}

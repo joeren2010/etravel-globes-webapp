@@ -34,9 +34,13 @@ export class ResvComponent implements OnInit {
   resvModel: any;
 
   ngOnInit(): void {
-    this.resvObservable = this.resvService.getResv();
+    this.loaddata();
   }
 
+  loaddata(){
+    this.resvObservable = this.resvService.getResv();
+  }
+  
   changeResvStatus(resvStatusIdx: number) {
     this.resvStatusIdx = resvStatusIdx;
   }
@@ -54,30 +58,72 @@ export class ResvComponent implements OnInit {
     this.viewResvBool = false;
   }
 
-  changeStatus() {
-    //alert("event generated...")                     //to test if saveCab function is working
-    let selectRef = this.selectForm.value;        //initializes the variable: cabRef
-    console.log(selectRef);                        //checks input values in web's inspect-element
-    this.resvService.storeResv(selectRef).subscribe({
-      next:(result:any) => console.log(result),
-      error:(error:any) => console.log(error),
-      complete:() => console.log("completed")
-    })
-    //this.selectForm.reset();                       //resets the form 
-    
+  changeStatus(event: any) { 
+    let value: any = event.value;
+    console.log(value);
+    return value;
   }
 
-    // save resv into database
-  saveResv(){
-    //alert("event generated...")                     //to test if saveCab function is working
-    let resvRef = this.resvForm.value;             //initializes the variable: cabRef
-    console.log(resvRef);                             //checks input values in web's inspect-element
+  updateStatus(){
+    //window.location.reload();
+    setTimeout(() => {
+      this.saveResv();
+    }, 1000);  
+    let resvStatus: any = this.resvStatus;
+    $("#selected").val() == "0";
+    switch($("#selected").val()){
+      case "5":
+        resvStatus[5] = "Cancelled";
+        console.log(this.resvStatus); 
+        break;
+      case "4":
+        resvStatus[4] = "Dropped";
+        console.log(this.resvStatus);
+        break;  
+      case "3":
+        resvStatus[3] = "Pickedup";
+        console.log(this.resvStatus);  
+        break;  
+      case "2":
+        resvStatus[2] = "Rejected";
+        console.log(this.resvStatus);
+        break;  
+      case "1":
+        resvStatus[1] = "Pending"; 
+        console.log(this.resvStatus);
+        break;
+      default:
+        resvStatus[0] = "Approved"; 
+        console.log(this.resvStatus);        
+    } 
+    //this.loaddata();
+    //window.location.reload
+    //this.selectForm.reset();  
+  }  
+
+  // save resv into database
+  saveResv(){                   
+    let resvRef = this.resvForm.value;             
+    console.log(resvRef);                             
     this.resvService.storeResv(resvRef).subscribe({
-      next:(result:any) => console.log(result),
+      next:(result:any) => {
+        if(result=="Resv Details stored successfully"){
+          alert("resv details stored successfully")
+          console.log(result);
+        }else {
+          alert("resv details didn't store")
+        }
+      },
       error:(error:any) => console.log(error),
-      complete:() => console.log("completed")
-    })
-    //this.resvForm.reset();                       //resets the form 
+      complete:() => {
+        console.log("completed");
+        this.loaddata();
+      }
+    }) 
+    // this.tempImageFilesPath.splice(0,this.tempImageFiles.length); //reset the array        
+    // this.tempImageFiles.splice(0,this.tempImageFiles.length);   //reset the array 
+    //resvRef.images.splice(0,resvRef.image.length);        // reset the array
+    //this.resvForm.reset();                       
   }
 
   locStorage(){
@@ -88,10 +134,20 @@ export class ResvComponent implements OnInit {
 
 
 export interface Resv {
-  resvId?: string;
   resvDate?: Date;
   clientName?: string;
+  clientId?: string;
   clientEmail?: string;
+  clientPhone?: string;
+  cartId?: string;
+  pickupLoc?: string;
+  pickupDate?: Date;
+  pickupTime?: string;
+  dropoffLoc?: string;
+  dropoffDate?: Date;
+  dropoffTime?: string;
+  tripDistance?: number;
+  unitPrice?: number;
   totalAmount?: number;
   driverName?: string;
   driverId?: string;
@@ -111,3 +167,40 @@ export interface Category {
   active?: boolean;
   createdOn?: Date;
 }
+
+
+
+
+
+
+
+
+  // updateStatus(){
+  //   let resvStatus: any = this.resvStatus;
+  //   if($("#selected").val() == "5"){   
+  //     resvStatus[5] = "Cancelled";
+  //     console.log(this.resvStatus); 
+  //   }
+  //   else if($("#selected").val() == "4"){    
+  //     resvStatus[4] = "Dropped";
+  //     console.log(this.resvStatus);  
+  //   }
+  //   else if($("#selected").val() == "3"){    
+  //     resvStatus[3] = "Pickedup";
+  //     console.log(this.resvStatus);  
+  //   }
+  //   else if($("#selected").val() == "2"){    
+  //     resvStatus[2] = "Rejected";
+  //     console.log(this.resvStatus);  
+  //   }
+  //   else if ($("#selected").val() == "1") {
+  //     resvStatus[1] = "Approved"; 
+  //     console.log(this.resvStatus);     
+  //   } else {    
+  //     resvStatus[0] = "Pending";
+  //     console.log(this.resvStatus);  
+  //   } 
+  //   //this.loaddata();
+  //   window.location.reload
+  //   //this.selectForm.reset();   
+  // }  

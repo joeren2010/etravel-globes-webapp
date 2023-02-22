@@ -32,10 +32,13 @@ export class CabComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cabObservable = this.cabService.getCab();
-    this.cabcategoryObservable = this.cabcategoryService.getCategory();    
+    this.loaddata();
   }
 
+  loaddata(){
+    this.cabObservable = this.cabService.getCab();
+    this.cabcategoryObservable = this.cabcategoryService.getCategory();  
+  }
 
   openModal(modal: any, cab: Cab | null = null) {
     this.tempImageFiles = []; 
@@ -55,10 +58,20 @@ export class CabComponent implements OnInit {
         images: this.formBuilder.array([]),
         thumbnailImage: [null],
         cabDescription: [null],
-        cabCategory: [null],
+        category: [null],
         active: [true],
         addedOn: [],
-        rating: [0]
+        rating: [0],
+        pickupLoc: [null],
+        pickupDate: [],
+        pickupTime: [],
+        dropoffLoc: [null],
+        dropoffDate: [],
+        dropoffTime: [],
+        unitPrice: 0.50,
+        tripDistance: [],
+        travelCharges: [],
+        itemsSubTotal: [],
       });
     } else {
       this.updation = true;
@@ -70,26 +83,85 @@ export class CabComponent implements OnInit {
         images: [cabObj.images],
         thumbnailImage: [cabObj.thumbnailImage],
         cabDescription: [cabObj.cabDescription],
-        cabCategory: [cabObj.cabCategory],
+        category: [cabObj.category],
         active: [cabObj.active],
         addedOn: [cabObj.addedOn],
-        rating: [cabObj.rating]
+        rating: [cabObj.rating],
+        pickupLoc: [cabObj.pickupLoc],
+        pickupDate: [cabObj.pickupDate],
+        pickupTime: [cabObj.pickupTime],
+        dropoffLoc: [cabObj.dropoffLoc],
+        dropoffDate: [cabObj.dropoffDate],
+        dropoffTime: [cabObj.dropoffTime],
+        unitPrice: [cabObj.unitPrice],
+        tripDistance: [cabObj.tripDistance],
+        travelCharges: [cabObj.travelCharges],
+        itemsSubTotal: [cabObj.itemsSubTotal],
       });
-      this.onSelectOption(cabObj.cabCategory);
+      this.onSelectOption(cabObj.category);
       this.tempImageFiles = cabObj.images || [];
     }
   }
 
-  compareByCategoryId(category1: cabCategory, category2: cabCategory) {
+  compareByCategoryId(category1: Category, category2: Category) {
     return category1 && category2 && category1.categoryId === category2.categoryId;
   }
 
-  onSelectOption(category: cabCategory | Event | undefined) {
+  onSelectOption(category: Category | Event | undefined) {
     // this.cabForm.patchValue({
     //   category: this.category.find(x => x.categoryId === category.categoryId)
     // })
   }
 
+  // save cab into database
+  saveCab(){
+    //alert("event generated...")                     //to test if saveCab function is working
+    let cabRef = this.cabForm.value;        //initializes the variable: cabRef
+    this.tempImageFilesPath.forEach((v, index) => {
+      cabRef.images[index]=v;    
+    })
+    console.log(cabRef);                        //checks input values in web's inspect-element
+    console.log(cabRef.thumbnailImage)
+    this.cabService.storeCab(cabRef).subscribe({
+      next:(result:any) => {
+        if(result=="Cab Details stored successfully"){
+          alert("cab details stored successfully")
+          console.log(result);
+        }else {
+          alert("cab details didn't store")
+        }
+      },
+      error:(error:any) => console.log(error),
+      complete:() => {
+        console.log("completed");
+        this.loaddata();
+        this.cabModel?.unitPrice;
+      }
+    }) 
+    this.tempImageFilesPath.splice(0,this.tempImageFiles.length); //reset the array        
+    this.tempImageFiles.splice(0,this.tempImageFiles.length);   //reset the array 
+    //cabRef.images.splice(0,cabRef.image.length);        // reset the array 
+    this.cabForm.reset();                       //resets the form
+  } 
+
+  deleteCab(cabId:any){
+    //alert(cabId)
+    this.cabService.deleteCab(cabId).subscribe({
+      next:(result:any)=> {
+        if(result=="Cab details deleted successfully"){
+          alert("cab details deleted successfully")
+        }else {
+          alert("cab details didn't delete")
+        }
+      },
+      error:(error:any)=> console.log(error),
+      complete:()=>{
+        console.log("completed");
+        this.loaddata();
+      }
+    })
+  }  
+  
   // view image model
   openImageModal(modal: any, imageUrls: string[], thumbnailImageIdx: number) {
     this.tempImageFiles = [...imageUrls];
@@ -130,35 +202,28 @@ export class CabComponent implements OnInit {
         // this.toast.warning("Only .png/.jpeg/.jpg file format accepted!!", file.name + " will not accepted.");
       }
     });
+  }  
+
+  fileToBlob(fileName:any){
+    let reader = new FileReader();
+    reader.readAsDataURL(fileName);
+    reader.onload =  (event) => {
+      return (<FileReader>event.target).result;
+    }
   }
 
-  changeThumbnailImageIdx(idx: number) {
-    this.cabForm.patchValue({
-      thumbnailImage: idx
-    })
+  blobToFile(theBlob:any, fileName:any){       
+    return new File([theBlob], fileName, { lastModified: new Date().getTime()})
   }
 
   removeImage(idx: number) {
     this.tempImageFiles.splice(idx, 1);
   }
 
-  // save cab into database
-  saveCab(){
-    //alert("event generated...")                     //to test if saveCab function is working
-    let cabRef = this.cabForm.value;        //initializes the variable: cabRef
-    this.tempImageFilesPath.forEach((v, index) => {
-      cabRef.images[index]=v;    
+  changeThumbnailImageIdx(idx: number) {
+    this.cabForm.patchValue({
+      thumbnailImage: idx
     })
-    console.log(cabRef);                        //checks input values in web's inspect-element
-    this.cabService.storeCab(cabRef).subscribe({
-      next:(result:any) => console.log(result),
-      error:(error:any) => console.log(error),
-      complete:() => console.log("completed")
-    })
-    //this.cabForm.reset();                       //resets the form 
-    this.tempImageFiles.splice(0,this.tempImageFiles.length);   //reset the array 
-    this.tempImageFilesPath.splice(0,this.tempImageFiles.length); //reset the array 
-    cabRef.images.splice(0,cabRef.image.length);        // reset the array
   }
 
 }
@@ -170,15 +235,25 @@ export interface Cab {
   cabColor?: string;
   cabDescription?: string;
   price?: number;
-  cabCategory?: cabCategory;
+  category?: Category;
   images?: string[];
   thumbnailImage?: number;
   active?: boolean;
   addedOn?: Date;
   rating?: number;
+  pickupLoc?: string;
+  pickupDate?: Date;
+  pickupTime?: string;
+  dropoffLoc?: string;
+  dropoffDate?: Date;
+  dropoffTime?: string;
+  unitPrice?: number;
+  tripDistance?: number;
+  travelCharges?: number;
+  itemsSubTotal?: number;
 }
 
-export interface cabCategory {
+export interface Category {
   categoryId?: string;
   categoryName?: string;
   categoryDescription?: string;

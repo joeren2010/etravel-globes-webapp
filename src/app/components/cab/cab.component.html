@@ -21,7 +21,6 @@
                <table class="table table-flush m-0">
                   <thead class="thead-light">
                      <tr>
-                        <th scope="col">S/N</th>
                         <th scope="col">Cab Id</th>
                         <th scope="col">Color</th>
                         <th scope="col">Model</th>
@@ -35,12 +34,11 @@
                      <tr *ngFor="let cab of cabObservable | async; index as idx">
                         <td>{{ idx + 1 }}</td>
                         <!-- names used below must match names used in your data table -->
-                        <td>{{ cab["cabId"] }}</td>
                         <td>{{ cab["cabColor"] }}</td>
                         <td>{{ cab["cabTitle"] }}</td>
                         <td class="text-wrap" class="col-12 col-sm-7">{{ cab["cabDescription"] }}</td>
-                        <td>{{ cab["cabCategory"]["categoryName"] }}</td>
-                        <td>{{ cab["price"] | currency:'USD':'symbol':'1.0' }}</td>
+                        <td>{{ cab["category"]["categoryName"] }}</td>
+                        <td>{{ cab["price"] | currency:'USD':'symbol':'1.2' }}</td>
                         <td>
                            <button type="button" class="btn btn-sm btn-dark me-1"
                               (click)="openImageModal(viewImageModal, cab.images, cab.thumbnailImage)">View
@@ -49,7 +47,8 @@
                               (click)="viewCabDetails(viewModal, cab)">View Details</button>
                            <button type="button" class="btn btn-sm btn-dark me-1"
                               (click)="openModal(cabModal, cab)">Update</button>
-                           <button type="button" class="btn btn-sm btn-danger me-1">Delete</button>
+                           <button type="button" class="btn btn-sm btn-danger me-1"
+                              (click)="deleteCab(cab.cabId)">Delete</button>
                         </td>
                      </tr>
                   </tbody>
@@ -76,36 +75,34 @@
          <div class="row">
             <div class="col-12 col-sm-4">
                <div class="form-group m-0 mb-2">
-                  <label for="cabId" class="text-sm">Cab Id</label>
-                  <input type="text" name="cabId" formControlName="cabId" class="form-control"
-                     placeholder="enter cab id" required>
-               </div>
-               <!-- <div class="col-12 col-sm-4"> -->
-               <div class="form-group m-0 mb-2">
                   <label for="name" class="text-sm">Model</label>
                   <input type="text" name="cabTitle" formControlName="cabTitle" class="form-control"
-                     placeholder="enter cab model e.g: Corvette 2023" required>
+                     placeholder="enter cab model eg: Corvette 2023" required>
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="name" class="text-sm">Category</label>
-                  <select id="name" name="cabCategory" class="form-select shadow-none form-control"
-                     formControlName="cabCategory" [compareWith]="compareByCategoryId"
+                  <select id="name" name="category" class="form-select shadow-none form-control"
+                     formControlName="category" [compareWith]="compareByCategoryId"
                      (selectedValueChange)="onSelectOption($event)" required>
-                     <option *ngFor="let cabCategory of cabcategoryObservable | async; index as idx"
-                        [ngValue]="cabCategory">
-                        {{ cabCategory.categoryName }}
+                     <option *ngFor="let category of cabcategoryObservable | async; index as idx" [ngValue]="category">
+                        {{ category.categoryName }}
                      </option>
                   </select>
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="price" class="text-sm">Base Price</label>
                   <input type="number" name="price" formControlName="price" class="form-control"
-                     placeholder="enter cab base price" required>
+                     placeholder="enter base price of cab" min="1" required>
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="cabColor" class="text-sm">Cab Color</label>
                   <input type="text" name="cabColor" formControlName="cabColor" class="form-control"
-                     placeholder="enter color of cab" min="1" required>
+                     placeholder="enter color of cab" required>
+               </div>
+               <div class="form-group m-0 mb-2">
+                  <label for="unitPrice" class="text-sm">Unit Price</label>
+                  <input type="number" name="unitPrice" formControlName="unitPrice" class="form-control"
+                     placeholder="enter price per mile... mileage" required>
                </div>
                <div class="form-group m-0 mb-2">
                   <label for="status" class="text-sm">Status</label><br>
@@ -131,17 +128,20 @@
                   <div class="d-flex flex-column">
                      <div class="d-flex justify-content-between align-items-center">
                         <h4 class="m-0">Cab Images</h4>
+                        <span style="font-size: small;">for thumbnail to work, please select one image at a time</span>
                         <input type="file" #file (change)="checkImageFileType($event)" multiple hidden>
                         <button type="button" class="btn btn-sm btn-dark" (click)="file.click()">
-                           Add
+                           Add Images
                         </button>
                      </div>
                   </div>
                   <div class="row mt-2" *ngIf="tempImageFiles.length == 0">
                      <div class="col-12" style="height: 40px;">
                         <div class="d-flex flex-column align-items-center justify-content-center">
-                           <span class="material-icons" style="font-size: 26px;">warning</span>
-                           <h4 class="m-0 mt-1">No Images</h4>
+                           <span class="material-icons" style="font-size: 18px; color: red;">
+                              warning: no images found
+                           </span>
+                           <h5 class="m-0 mt-1" style="color: red;"><strong>.....please add images</strong></h5>
                         </div>
                      </div>
                   </div>
@@ -154,7 +154,7 @@
                                  {{ imageFile.name || imageFile }}
                               </p>
                               <span *ngIf="cabForm.get('thumbnailImage')?.value === idx" class="text-sm text-muted">
-                                 Selected as Thumnail Image
+                                 Selected as Thumbnail Image
                               </span>
                            </div>
                            <div class="d-flex align-items-center">
@@ -214,7 +214,7 @@
       </div>
       <div class="d-flex flex-column mb-1">
          <span class="text-sm text-muted">Added On</span>
-         <p class="text-wrap">{{ cabModel?.addedOn | date: 'dd MMMM yyyy, hh:MM:ss aa' }}</p>
+         <p class="text-wrap">{{ cabModel?.addedOn | date: 'MMM dd yyyy, hh:MM:ss aa' }}</p>
       </div>
    </div>
 </ng-template>

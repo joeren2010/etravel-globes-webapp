@@ -17,7 +17,6 @@ import { CabCatclientComponent } from './components/cab/cab-catclient/cab-catcli
 import { CabCatdriverComponent } from './components/cab/cab-catdriver/cab-catdriver.component';
 import { CabCategoryComponent } from './components/cab/cab-category/cab-category.component';
 import { CabCatotherComponent } from './components/cab/cab-catother/cab-catother.component';
-import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { CartComponent } from './components/cart/cart.component';
 import { BookAgainComponent } from './components/cart/book-again/book-again.component';
 import { SavedItemsComponent } from './components/cart/saved-items/saved-items.component';
@@ -73,7 +72,6 @@ const routes: Routes = [
     { path :'cabcatdriver', component: CabCatdriverComponent },
     { path :'cabcatother', component: CabCatotherComponent },
   ]},
-  { path:'calcfare' , component:CalcfareComponent },
   { path:'cart' , children: [
     { path :'', component: CartComponent },
     { path :'bookagain', component: BookAgainComponent },

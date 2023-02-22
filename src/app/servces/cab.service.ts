@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CabService {
-  private urlPostCab:   string = 'http://localhost:8383/cab/storeCab';
-  private urlGetAllCab: string = 'http://localhost:8383/cab/findAllCab';
-  private urlGetOneCab: string = 'http://localhost:8383/cab/storeCab';
-  private urlDelAllCab: string = 'http://localhost:3000/meetings/';
-  private urlDelOneCab: string = 'http://localhost:3000/meetings/';
+  private urlPostCab:   string = 'http://localhost:7171/cab/storeCab';
+  private urlGetAllCab: string = 'http://localhost:7171/cab/findAllCab';
+  private urlGetOneCab: string = 'http://localhost:7171/cab/findCabById';
+  private urlDelAllCab: string = 'http://localhost:7171/cab/deleteAll';
+  private urlDelOneCab: string = 'http://localhost:7171/cab/deleteCabById/';
   private urlPutCab:    string = 'http://localhost:3000/meetings/';
   private urlPatchCab:  string = 'http://localhost:3000/meetings/';
   private urlCalCab:    string = 'http://localhost:3000/calen.php/';
@@ -22,18 +22,20 @@ export class CabService {
   constructor(private httpClient: HttpClient) { }
 
   getCab() {
-    //return this.httpClient.get<any[]>(this.urlGetAllCab);
-    return this.httpClient.get<any[]>('../../assets/data/cab.json');
+    return this.httpClient.get<any[]>(this.urlGetAllCab);
+    //return this.httpClient.get<any[]>('../../assets/data/cab.json');
+  }
+
+  getOneCab(cabId:any): Observable<string>{
+    return this.httpClient.get(this.urlGetOneCab+cabId,{responseType:'text'});
+    //return this.httpClient.get<any[]>('../../assets/data/cab.json');
   }
 
   storeCab(cab:any): Observable<string>{
     return this.httpClient.post(this.urlPostCab, cab, {responseType:'text'});
+  }
 
-    /* Usefull Notes:
-    * urlPrd: string = 'http://localhost:9090/cab/storeCab' is backend url for admin's signin
-    * passes data btw adminsComponent signIn, adminsService signIn and adminController signIn
-    * responseType = "text" because our backend (adminsController) codes is returning "string"
-    * the default "return datatype" is json... for json... just remove "{responseType:'text'}"
-    */
+  deleteCab(cabId:any):Observable<string>{
+    return this.httpClient.delete(this.urlDelOneCab+cabId,{responseType:'text'});
   }
 }

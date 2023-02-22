@@ -7,9 +7,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AdminService {
-  private urlPostAdm:   string = 'http://localhost:8181/admin/signIn';;
-  private urlGetAllAdm: string = 'http://localhost:8181/product/findAllProduct';
-  private urlGetOneAdm: string = 'http://localhost:8181/product/storeProduct';
+  //api url - admin (see below for template to use in future)
+  private urlPostAdms:   string = 'http://localhost:6161/admin/signUp';  
+  private urlPostAdm:   string = 'http://localhost:6161/admin/signIn';
+  private urlGetAllAdm: string = 'http://localhost:6161/admin/findAllAdmin';
+  private urlGetOneAdm: string = 'http://localhost:6161/admin/findAdminById/';
   private urlDelAllAdm: string = 'http://localhost:3000/meetings/';
   private urlDelOneAdm: string = 'http://localhost:3000/meetings/';
   private urlPutAdm:    string = 'http://localhost:3000/meetings/';
@@ -33,7 +35,7 @@ export class AdminService {
     return this.httpClient.post(this.urlPostAdm, admin, {responseType:'text'});
 
     /* Usefull Notes:
-    * urlAdm: string = 'http://localhost:9090/admin/signIn' is backend url for admin's signin
+    * urlAdm: string = 'http://localhost:6161/admin/signIn' is backend url for admin's signin
     * passes data btw adminsComponent signIn, adminsService signIn and adminController signIn
     * responseType = "text" because our backend (adminsController) codes is returning "string"
     * the default "return datatype" is json... for json... just remove "{responseType:'text'}"
@@ -54,4 +56,23 @@ export class AdminService {
   logOut(){
     this.obj.next(false);        //when called... returns "false" 
   }
+
+  signUp(admin:any):Observable<string>{
+    return this.httpClient.post(this.urlPostAdms, admin, {responseType:'text'});
+  }  
+  
 }
+  // api url - admin... for future, please use below:
+  // private urlPostAdms:   string = 'http://localhost:6161/admin/signIn';
+  // private urlPostAdm:   string = 'http://localhost:6161/admin/signUp';  
+  // private urlGetAllAdm: string = 'http://localhost:6161/admin/findAdminAll';
+  // private urlGetOneAdm: string = 'http://localhost:6161/admin/findAdminById/';
+  // private urlDelAllAdm: string = 'http://localhost:6161/admin/deleteAdminAll';
+  // private urlDelOneAdm: string = 'http://localhost:6161/admin/deleteAdminById/';
+  // private urlPutAdm:    string = 'http://localhost:3000/meetings/';
+  // private urlPatchAdm:  string = 'http://localhost:3000/meetings/';
+  // private urlCalAdm:    string = 'http://localhost:3000/calen.php/';
+  // private urlMtgAdm:    string = 'http://localhost:3000/calen.php/';
+  // private urlApiAdm:    string = 'https://fakestoreapi.com/projects';
+  // private urlLocAdm:    string = 'http://localhost:3000/meetings';
+  // private urlComAdm:    string = './../../assets/data/meetingsCom.json';

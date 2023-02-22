@@ -6,9 +6,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ClientService {
-  private urlPostClt:   string = 'http://localhost:6161/client/signIn';;
-  private urlGetAllClt: string = 'http://localhost:6161/product/findAllProduct';
-  private urlGetOneClt: string = 'http://localhost:6161/product/storeProduct';
+  private urlPostClts: string = 'http://localhost:8181/client/signUp';    
+  private urlPostClt:   string = 'http://localhost:8181/client/signIn';
+  private urlGetAllClt: string = 'http://localhost:8181/client/findAllClient';
+  private urlGetOneClt: string = 'http://localhost:8181/client/findClientById';
   private urlDelAllClt: string = 'http://localhost:3000/meetings/';
   private urlDelOneClt: string = 'http://localhost:3000/meetings/';
   private urlPutClt:    string = 'http://localhost:3000/meetings/';
@@ -31,13 +32,6 @@ export class ClientService {
 
   signIn(client:any):Observable<string>{
     return this.httpClient.post(this.urlPostClt, client, {responseType:'text'});
-
-    /* Usefull Notes:
-    * urlAdm: string = 'http://localhost:9090/admin/signIn' is backend url for admin's signin
-    * passes data btw adminsComponent signIn, adminsService signIn and adminController signIn
-    * responseType = "text" because our backend (adminsController) codes is returning "string"
-    * the default "return datatype" is json... for json... just remove "{responseType:'text'}"
-    */
   }
 
   get isLogged(){
@@ -54,4 +48,9 @@ export class ClientService {
   logOut(){
     this.obj.next(false);        //when called... returns "false" 
   }
+
+  signUp(client:any):Observable<string>{
+    return this.httpClient.post(this.urlPostClts, client, {responseType:'text'});
+  }  
+
 }

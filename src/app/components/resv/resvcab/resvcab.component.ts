@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import * as $ from 'jquery';
+import { CabService } from 'src/app/servces/cab.service';
 
 
 @Component({
@@ -28,10 +29,12 @@ export class ResvcabComponent implements OnInit {
     dropoffLoc: new FormControl(), 
     dropoffDate: new FormControl(),
     dropoffTime: new FormControl(), 
-    active: new FormControl()
+    tripDistance: new FormControl(), 
+    //active: new FormControl()
   });
 
   constructor(
+    private cabService:CabService,
     private resvcabService:ResvcabService,
     public router:Router,
     private formBuilder: FormBuilder,
@@ -39,7 +42,7 @@ export class ResvcabComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCabs(); 
-    this.getDate()  
+    this.getDate();    
   }
 
     //disable pass-date
@@ -79,43 +82,70 @@ export class ResvcabComponent implements OnInit {
     this.resvcabService.addCabToCart(cab);
   }
 
-  // save rescForm into database
+  initializeForm(rescObj: Resc | null) {  
+    if (rescObj == null) {
+      this.rescForm = this.formBuilder.group({   
+        pickupLoc: [null],     
+        pickupDate: [],
+        pickupTime: [],
+        dropoffLoc: [null],     
+        dropoffDate: [],
+        dropoffTime: [],
+        tripDistance: [],
+      });
+    } else {
+      this.rescForm = this.formBuilder.group({
+        pickupLoc: [rescObj.pickupLoc],
+        pickupDate: [rescObj.pickupDate],
+        pickupTime: [rescObj.pickupTime],
+        dropoffLoc: [rescObj.dropoffLoc],
+        dropoffDate: [rescObj.dropoffDate],
+        dropoffTime: [rescObj.dropoffTime],
+        tripDistance: [rescObj.tripDistance],
+      });
+    }
+  }
+
+  onlyNum(event:any):boolean {
+    const charCode = (event.which)? event.which: event.keyCode
+    if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+      console.log("charCode restricted is: "+ charCode);
+      return false
+    }
+    // if(charCode == 9 || charCode == 13){
+    //   event.preventDefault(); 
+    //   this.saveResc();
+    // }
+    return true;
+  }
+
+  // save rescData into local storage
   saveResc(){
-    let rescData = this.rescForm.value;                   
-    console.log(rescData);                                          //console.log(rescData.pickupLoc);                                 
-    sessionStorage.setItem('rescData', JSON.stringify(rescData));
-    //this.rescForm.reset();                                         //resets the form 
-  } 
+    if (sessionStorage.getItem('rescData') !== null){
+      let rescData = this.rescForm.value; 
+      //console.log(rescData);                                          
+      sessionStorage.setItem('rescData', JSON.stringify(rescData)); 
+    }
+    else{
+      let rescData = this.rescForm.value; 
+      rescData = sessionStorage.setItem('rescData', JSON.stringify(rescData));    
+      return rescData
+    }                             
+  }
+  
+  localCart(){
+    this.resvcabService.saveLocalCart();
+  }
 
+}
 
-
-
-
-
-  // public unitPrice: number = 0;  
-  // public tripDistance: number = 0;
-  // public travelCharges: number = 0;
-
-  // this.resvcabService.calcTravelCost();
-
-  // calcTravelCost() {
-  //   this.travelCharges = this.cabs.reduce((prev, next) => prev + (next['unitPrice'] * next['tripDistance']), 0);
-  //   // this.itemsSubTotal = this.cabs.reduce((prev, next) => prev + ((next['price'] + next['travelCharges']) * next['quantity']), 0);
-  // } 
-
-  // save rescForm into database
-  // saveTravel(){
-  //   //alert("event generated...")                         //to test if saveProduct function is working
-  //   let travelData = {
-  //     this.tripDistance: tripDistance
-  //   }
-  //   console.log(tripDistance);                                 //checks input values in web's inspect-element
-  //   sessionStorage.setItem('tripDistance', JSON.stringify(tripDistance));
-  //   //this.rescForm.reset();                       //resets the form 
-  // } 
-
-  // getTravelccost() {
-  //   this.resvcabService.calcTravelCost();    
-  // } 
-
+interface Resc {
+  pickupLoc?: string;
+  pickupDate?: Date;
+  pickupTime?: string;
+  dropoffLoc?: string;
+  dropoffDate?: Date;
+  dropoffTime?: string;
+  tripDistance?: number;
+  //active?: boolean;
 }

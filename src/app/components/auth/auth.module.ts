@@ -8,9 +8,6 @@ import { LoginClientsComponent } from './login-clients/login-clients.component';
 import { LoginDriversComponent } from './login-drivers/login-drivers.component';
 import { NewPasswdComponent } from './new-passwd/new-passwd.component';
 import { NewRegisterComponent } from './new-register/new-register.component';
-import { PasswComponent } from './passw/passw.component';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
 import { AdminService } from 'src/app/servces/admin.service';
 import { AuthService } from 'src/app/servces/auth.service';
 import { ClientService } from 'src/app/servces/client.service';
@@ -30,9 +27,6 @@ import { DriverService } from 'src/app/servces/driver.service';
     LoginDriversComponent,
     NewPasswdComponent,
     NewRegisterComponent,
-    PasswComponent,
-    SigninComponent,
-    SignupComponent,
   ],
   imports: [
     CommonModule,

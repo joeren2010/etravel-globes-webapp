@@ -26,7 +26,6 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavsideComponent } from './components/navside/navside.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { CalcfareComponent } from './components/calcfare/calcfare.component';
 import { ResvcabService } from './servces/resvcab.service';
 
 
@@ -41,8 +40,7 @@ import { ResvcabService } from './servces/resvcab.service';
     HomeComponent,
     NavbarComponent,
     NavsideComponent,
-    NotfoundComponent,
-    CalcfareComponent,    
+    NotfoundComponent, 
   ],
   imports: [
     BrowserModule,

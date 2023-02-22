@@ -7,9 +7,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DriverService {
-  private urlPostDvr:   string = 'http://localhost:7171/driver/signIn';;
-  private urlGetAllDvr: string = 'http://localhost:9090/product/findAllProduct';
-  private urlGetOneDvr: string = 'http://localhost:9090/product/storeProduct';
+  private urlPostDvrs:   string = 'http://localhost:9191/driver/signUp';
+  private urlPostDvr:   string = 'http://localhost:9191/driver/signIn';
+  private urlGetAllDvr: string = 'http://localhost:9191/driver/findAllDriver';
+  private urlGetOneDvr: string = 'http://localhost:9191/driver/findDriverById';
   private urlDelAllDvr: string = 'http://localhost:3000/meetings/';
   private urlDelOneDvr: string = 'http://localhost:3000/meetings/';
   private urlPutDvr:    string = 'http://localhost:3000/meetings/';
@@ -31,13 +32,6 @@ export class DriverService {
 
   signIn(driver:any):Observable<string>{
     return this.httpClient.post(this.urlPostDvr, driver, {responseType:'text'});
-
-    /* Usefull Notes:
-    * urlAdm: string = 'http://localhost:9090/admin/signIn' is backend url for admin's signin
-    * passes data btw adminsComponent signIn, adminsService signIn and adminController signIn
-    * responseType = "text" because our backend (adminsController) codes is returning "string"
-    * the default "return datatype" is json... for json... just remove "{responseType:'text'}"
-    */
   }
 
   get isLogged(){
@@ -54,4 +48,9 @@ export class DriverService {
   logOut(){
     this.obj.next(false);        //when called... returns "false" 
   }
+
+  signUp(driver:any):Observable<string>{
+    return this.httpClient.post(this.urlPostDvrs, driver, {responseType:'text'});
+  }  
+
 }

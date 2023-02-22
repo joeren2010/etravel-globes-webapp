@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CartService } from 'src/app/servces/cart.service';
 import { ResvcabService } from 'src/app/servces/resvcab.service';
 
 
@@ -10,6 +12,7 @@ import { ResvcabService } from 'src/app/servces/resvcab.service';
 export class PaymentComponent implements OnInit {
 
   totalPrice: number = 0;
+  cartObservable: Observable<any[]> = new Observable();
 
   cardImages: string[] = [
     "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png",
@@ -18,38 +21,47 @@ export class PaymentComponent implements OnInit {
 
   constructor(
     public resvcabService: ResvcabService,
+    public cartService: CartService, 
   ) { }
 
   ngOnInit(): void {
-    this.totalPrice = this.resvcabService.cabs.reduce((prev, next) => prev + (next['price'] * next['quantity']), 0);
+    this.loaddata();
   }
+
+  loaddata(){
+    this.calctotal();
+    this.cartObservable = this.cartService.getAllCart();
+  }
+
+  calctotal(){
+    this.totalPrice = this.resvcabService.cabs.reduce((prev, next) => prev + ((next['price'] * next['quantity']) + (next['unitPrice'] * (next['tripDistance'] * next['quantity']))), 0);
+    // this.totalPrice = this.resvcabService.cabs.reduce((prev, next) => prev + (next['price'] * next['quantity']), 0);
+  }
+
+  deleteCart(cartId:any){
+    //alert(cabId)
+    this.cartService.deleteCart(cartId).subscribe({
+      next:(result:any)=> {
+        if(result=="Cart details deleted successfully"){
+          alert("cart details deleted successfully")
+        }else {
+          alert("cart details didn't delete")
+        }
+      },
+      error:(error:any)=> console.log(error),
+      complete:()=>{
+        console.log("completed");
+        this.loaddata();
+      }
+    })
+  }   
 
 }
 
 
-  // rescRef: any[] = [];
-  //rescForm: FormGroup = new FormGroup({});
-
-  // rescForm = new FormGroup({
-  //   pickupLoc: new FormControl(),
-  //   pickupDate: new FormControl(), 
-  //   pickupTime: new FormControl(),
-  //   dropoffLoc: new FormControl(), 
-  //   dropoffDate: new FormControl(),
-  //   dropoffTime: new FormControl(), 
-  //   active: new FormControl()
-  // });
 
 
-  // interface Rescdata {
-//   pickupLoc?: string;
-//   pickupDate?: Date;
-//   pickupTime?: string;
-//   dropoffLoc?: string;
-//   dropoffDate?: Date;
-//   dropoffTime?: string;
-//   active?: boolean;
-// }
+
 
 
 
@@ -79,38 +91,4 @@ export class PaymentComponent implements OnInit {
 //     $(".gender").hide();
 //   }
 // });
-
-  // initialiseForm(rescObj: Rescdata | null) {
-  //   if (rescObj == null) {
-  //     //this.updation = false;
-  //     this.rescForm = this.formBuilder.group({
-  //       pickupLoc: [null],     
-  //       pickupDate: [],
-  //       pickupTime: [],
-  //       dropoffLoc: [null],     
-  //       dropoffDate: [],
-  //       dropoffTime: [],
-  //     });
-  //   } else {
-  //     //this.updation = true;
-  //     this.rescForm = this.formBuilder.group({
-  //       pickupLoc: [rescObj.pickupLoc],
-  //       pickupDate: [rescObj.pickupDate],
-  //       pickupTime: [rescObj.pickupTime],
-  //       dropoffLoc: [rescObj.dropoffLoc],
-  //       dropoffDate: [rescObj.dropoffDate],
-  //       dropoffTime: [rescObj.dropoffTime],
-  //     });
-  //   }
-  // } 
-
-  
-  // // save rescForm into database
-  // saveResc(){
-  //   //alert("event generated...")                         //to test if saveProduct function is working
-  //   let rescData = this.rescForm.value;                    //initializes the variable: productRef 
-  //   console.log(rescData);                                 //checks input values in web's inspect-element
-  //   sessionStorage.setItem('rescData', JSON.stringify(rescData));
-  //   //this.rescForm.reset();                       //resets the form 
-  // }  
 

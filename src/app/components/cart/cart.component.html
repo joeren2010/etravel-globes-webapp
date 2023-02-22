@@ -39,18 +39,24 @@
                            <span class="font-weight-bold mr-2">{{ cab["quantity"] }}</span>
                         </p>
                         <p class="card-text m-0 mb-0">
-                           <span class="text-muted mr-2">Pickup Loc.: </span>{{ getPickupLoc() }}
+                           <span class="text-muted">Pickup Loc.: </span>
+                           <span class="font-weight-bold">{{ cab["pickupLoc"] || 0 }}</span>
                            {{ [" || "] }}
-                           <span class="text-muted mr-2">Pickup Date: </span>{{ getPickupDate() }}
+                           <span class="text-muted">Pickup Date: </span>
+                           <span class="font-weight-bold">{{ cab["pickupDate"] || 0 }}</span>
                            {{ [" || "] }}
-                           <span class="text-muted mr-2">Pickup Time: </span>{{ getPickupTime() }}
+                           <span class="text-muted">Pickup Time: </span>
+                           <span class="font-weight-bold">{{ cab["pickupTime"] || 0 }}</span>
                         </p>
                         <p class="card-text m-0 mb-0">
-                           <span class="text-muted mr-2">Dropoff Loc.: </span>{{ getDropoffLoc() }}
+                           <span class="text-muted">Dropoff Loc.: </span>
+                           <span class="font-weight-bold">{{ cab["dropoffLoc"] || 0 }}</span>
                            {{ [" || "] }}
-                           <span class="text-muted mr-2">Dropoff Date: </span>{{ getDropoffDate() }}
+                           <span class="text-muted">Dropoff Date: </span>
+                           <span class="font-weight-bold">{{ cab["dropoffDate"] || 0 }}</span>
                            {{ [" || "] }}
-                           <span class="text-muted mr-2">Dropoff Time: </span>{{ getDropoffTime() }}
+                           <span class="text-muted">Dropoff Time: </span>
+                           <span class="font-weight-bold">{{ cab["dropoffTime"] || 0 }}</span>
                         </p>
                         <p class="card-text m-0 mb-3">
                            <span class="text-muted">Trip Distance: </span>
@@ -60,15 +66,11 @@
                            <span class="font-weight-bold">
                               {{ cab['travelCharges'] | currency:'USD':'symbol' || 0}}
                            </span>
-                           <!-- <span class="text-muted mr-2">Travel Cost: </span>
-                           <span>{{ travelcost() | currency:'USD':'symbol' || 0}}</span> -->
                            {{ [" || "] }}
                            <span class="text-muted">Sub Total: </span>
                            <span class="font-weight-bold">
                               {{ cab['itemsSubTotal'] | currency:'USD':'symbol' || 0}}
                            </span>
-                           <!-- <span class="text-muted mr-2">Sub Total: </span>
-                           <span>{{ subtotal() | currency:'USD':'symbol' || 0}}</span> -->
                         </p>
                      </div>
                      <div class="d-flex align-items-center">
@@ -105,36 +107,13 @@
             </div>
          </div>
          <div class="card-footer bg-white border-0">
-            <button type="button" class="btn btn-sm btn-dark w-100" routerLink="/payment"
-               [disabled]="resvcabService.cabs.length === 0">
-               Proceed To Payment
+            <button type="button" class="btn btn-sm btn-dark w-100" routerLink="#" (click)="saveCart()"
+               [disabled]="resvcabService.cabs.length === 0">Proceed To Payment
             </button>
+            <!-- <button type="button" class="btn btn-sm btn-dark w-100" routerLink="/payment"
+               [disabled]="resvcabService.cabs.length === 0" (click)="saveCart()">Proceed To Payment
+            </button> -->
          </div>
       </div>
    </div>
 </div>
-
-
-
-<!-- <span class="text-muted mr-2">Trip Distance: </span>{{ getCalc() }} -->
-<!-- <span class="text-muted mr-2">Travel Cost: </span>{{ getCalc() }} -->
-<!-- <span class="text-muted mr-2">Sub Total: </span>{{ getCalc() }} -->
-
-
-<!-- <span class="text-muted">Travel Cost: </span>
-<span class="font-weight-bold">
-   {{ cab.travelCharges | currency:'USD':'symbol' || 0}}
-</span> -->
-
-<!-- <span class="font-weight-bold">
-   {{ cab["travelCharges"] | currency:'USD':'symbol' || 0}}
-</span> -->
-
-<!-- <span class="font-weight-bold">
-   {{ cab["itemsSubTotal"] | currency:'USD':'symbol' || 0 }}
-</span> -->
-
-<!-- <span class="text-muted">Sub Total: </span>
-<span class="font-weight-bold">
-   {{ cab.itemsSubTotal | currency:'USD':'symbol' || 0 }}
-</span> -->
